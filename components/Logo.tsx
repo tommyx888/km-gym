@@ -1,47 +1,59 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { site } from '@/lib/site';
 
 /**
- * Dočasné logo KM Gym – koncept „Hanko“ (červená pečať s monogramom).
- * Až bude finálne logo (SVG), nahraď obsah tohto komponentu.
+ * Logo KM Gym.
+ * - mark:  znak (KM + činka) – hlavička, päta, favicon
+ * - full:  znak + wordmark „KM GYM“ – veľké použitie (hero, OG obrázok)
+ * Zdroje: public/logo/ (transparentné PNG z dodaného loga).
  */
-export function LogoMark({ className = '' }: { className?: string }) {
+export function LogoMark({ className = '', priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 64 64"
+    <Image
+      src="/logo/km-gym-mark-160.png"
+      alt=""
+      width={300}
+      height={160}
+      priority={priority}
       className={className}
       aria-hidden="true"
-      focusable="false"
-    >
-      <rect x="2" y="2" width="60" height="60" fill="var(--km-red-600)" />
-      <rect x="2" y="2" width="60" height="60" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-      {/* K */}
-      <path d="M13 15h8v14l10-14h9L28 31l12 18h-9L21 34v15h-8z" fill="#fff" />
-      {/* M – zjednodušené, z pravej strany */}
-      <path d="M40 49V15h6l5 10 5-10h6v34h-7V31l-4 8h-1l-4-8v18z" fill="#fff" opacity="0" />
-    </svg>
+    />
+  );
+}
+
+export function LogoFull({ className = '', priority = false }: { className?: string; priority?: boolean }) {
+  return (
+    <Image
+      src="/logo/km-gym-logo-400.png"
+      alt={`${site.name} logo`}
+      width={548}
+      height={400}
+      priority={priority}
+      className={className}
+    />
   );
 }
 
 export default function Logo({
   href,
   label = site.name,
-  compact = false,
+  compact = true,
+  priority = false,
 }: {
   href: string;
   label?: string;
   compact?: boolean;
+  priority?: boolean;
 }) {
   return (
     <Link href={href} className="group inline-flex items-center gap-3" aria-label={label}>
-      <span className="relative block h-10 w-10 shrink-0 overflow-hidden">
-        <span className="absolute inset-0 bg-crimson-600 transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-110" />
-        <span className="font-display absolute inset-0 flex items-center justify-center text-[1.35rem] leading-none text-white">
-          KM
-        </span>
-      </span>
+      <LogoMark
+        priority={priority}
+        className="h-11 w-auto transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-105 md:h-13"
+      />
       {!compact && (
-        <span className="font-display text-[1.6rem] leading-none tracking-[0.08em] text-white">
+        <span className="font-display hidden text-[1.5rem] leading-none tracking-[0.1em] text-white sm:inline">
           KM<span className="text-mist"> GYM</span>
         </span>
       )}

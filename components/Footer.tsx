@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Logo from './Logo';
+import { LogoFull } from './Logo';
 import { localizedHref, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
@@ -23,7 +23,9 @@ export default function Footer({ locale }: { locale: Locale }) {
       <div className="container relative z-10 mx-auto px-5 pt-20 pb-10 md:px-8">
         <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Logo href={localizedHref(locale, 'home')} />
+            <Link href={localizedHref(locale, 'home')} className="inline-block" aria-label={site.name}>
+              <LogoFull className="h-28 w-auto md:h-32" />
+            </Link>
             <p className="font-display mt-8 text-[2.4rem] leading-none text-white">{t.footer.tagline}</p>
             <p className="mt-4 max-w-sm leading-relaxed text-mist">{t.footer.description}</p>
             <div className="mt-8 inline-flex items-center gap-3 border hairline px-4 py-2 text-[0.7rem] uppercase tracking-[0.25em] text-mist">

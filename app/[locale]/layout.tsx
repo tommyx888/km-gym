@@ -27,6 +27,8 @@ const bebas = localFont({
   ],
 });
 
+export const viewport = { themeColor: '#131518' };
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -57,7 +59,7 @@ export async function generateMetadata({
       locale: l === 'sk' ? 'sk_SK' : 'en_GB',
       siteName: site.name,
     },
-    icons: { icon: '/favicon.ico' },
+    manifest: '/manifest.webmanifest',
   };
 }
 

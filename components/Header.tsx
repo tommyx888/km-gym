@@ -49,7 +49,7 @@ export default function Header({ locale }: { locale: Locale }) {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${solid || open ? 'header-solid' : ''}`}
     >
       <nav className="container mx-auto flex items-center justify-between px-5 py-4 md:px-8 md:py-5">
-        <Logo href={localizedHref(locale, 'home')} />
+        <Logo href={localizedHref(locale, 'home')} priority />
 
         {/* Desktop */}
         <div className="hidden items-center gap-8 lg:flex">
@@ -97,7 +97,7 @@ export default function Header({ locale }: { locale: Locale }) {
       {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed inset-x-0 top-[72px] bottom-0 z-40 bg-ink-950 transition-all duration-600 [transition-timing-function:var(--ease-out-expo)] ${
+        className={`lg:hidden fixed inset-x-0 top-[76px] bottom-0 z-40 bg-ink-950 transition-all duration-600 [transition-timing-function:var(--ease-out-expo)] ${
           open ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-3'
         }`}
         aria-hidden={!open}
