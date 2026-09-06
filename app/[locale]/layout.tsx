@@ -75,7 +75,15 @@ export default async function LocaleLayout({
   const t = getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} ${bebas.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${bebas.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Nastaví tému pred prvým vykreslením – bez preblikávania */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('km_theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-ink-900 text-white">
         <a
           href="#content"

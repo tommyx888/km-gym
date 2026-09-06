@@ -3,6 +3,10 @@
 /* ------------------------------------------------------------------
    KM Gym design tokens — červená / antracit / biela
    ------------------------------------------------------------------ */
+html {
+  color-scheme: dark;
+}
+
 :root {
   --km-anthracite-950: #0b0c0e;
   --km-anthracite-900: #131518;
@@ -188,15 +192,15 @@ body {
 
 .btn-primary {
   background: var(--km-red-600);
-  color: var(--km-white);
+  color: #ffffff;
   border-color: var(--km-red-600);
 }
 .btn-primary::before {
-  background: var(--km-white);
+  background: #ffffff;
 }
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  color: var(--km-anthracite-950);
+  color: #0b0c0e;
 }
 
 .btn-ghost {
@@ -445,10 +449,61 @@ select.field option {
   }
 }
 
+
+/* ------------------------------------------------------------------
+   Svetlá téma – prepína sa cez html[data-theme="light"] (ThemeToggle).
+   Celá škála sa zrkadlí, červená ostáva; Tailwind `white` sa mapuje na text.
+   ------------------------------------------------------------------ */
+html[data-theme="light"] {
+  --km-anthracite-950: #ffffff;
+  --km-anthracite-900: #f4f3f0;
+  --km-anthracite-800: #ffffff;
+  --km-anthracite-700: #dedbd5;
+  --km-anthracite-600: #c4c0b8;
+  --km-anthracite-500: #6b7079;
+  --km-mist: #5b6068;
+  --km-white: #0f1113;
+  --km-off-white: #131518;
+  --color-white: #0f1113;
+  color-scheme: light;
+}
+html[data-theme="light"] .header-solid {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom-color: var(--km-anthracite-700);
+}
+html[data-theme="light"] .grain::after {
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+html[data-theme="light"] .logo-dark { display: none; }
+html:not([data-theme="light"]) .logo-light { display: none; }
+html[data-theme="light"] .field {
+  background: #ffffff;
+}
+html[data-theme="light"] .btn-ghost {
+  border-color: var(--km-anthracite-600);
+}
+html[data-theme="light"] .btn-light {
+  background: var(--km-anthracite-950);
+  color: #ffffff;
+  border-color: var(--km-anthracite-950);
+}
+html[data-theme="light"] .btn-light:hover {
+  color: #ffffff;
+}
+html[data-theme="light"] .theme-invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* Bez JavaScriptu nič neskrývať */
 @media (scripting: none) {
   .reveal {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Svetlá téma – jemnejší červený odlesk na svetlom podklade */
+html[data-theme="light"] .animate-breathe {
+  opacity: 0.16 !important;
 }

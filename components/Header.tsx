@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
@@ -64,14 +65,16 @@ export default function Header({ locale }: { locale: Locale }) {
             </Link>
           ))}
           <LanguageSwitcher locale={locale} />
+          <ThemeToggle labels={t.nav.theme} />
           <Link href={localizedHref(locale, 'reservations')} className="btn btn-primary !py-3 !px-6">
             {t.nav.cta}
           </Link>
         </div>
 
         {/* Mobile toggle */}
-        <div className="flex items-center gap-4 lg:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <LanguageSwitcher locale={locale} />
+          <ThemeToggle labels={t.nav.theme} />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}

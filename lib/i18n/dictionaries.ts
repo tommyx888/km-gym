@@ -23,6 +23,7 @@ const sk = {
     menu: 'Menu',
     close: 'Zavrieť',
     language: 'Jazyk',
+    theme: { dark: 'Tmavý režim', light: 'Svetlý režim' },
   },
   hero: {
     eyebrow: 'Prémiová posilňovňa',
@@ -275,6 +276,7 @@ const en: typeof sk = {
     menu: 'Menu',
     close: 'Close',
     language: 'Language',
+    theme: { dark: 'Dark mode', light: 'Light mode' },
   },
   hero: {
     eyebrow: 'Premium strength gym',

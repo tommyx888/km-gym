@@ -10,28 +10,19 @@ import { site } from '@/lib/site';
  */
 export function LogoMark({ className = '', priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <Image
-      src="/logo/km-gym-mark-160.png"
-      alt=""
-      width={300}
-      height={160}
-      priority={priority}
-      className={className}
-      aria-hidden="true"
-    />
+    <>
+      <Image src="/logo/km-gym-mark-160.png" alt="" width={300} height={160} priority={priority} className={`logo-dark ${className}`} aria-hidden="true" />
+      <Image src="/logo/km-gym-mark-160-light.png" alt="" width={300} height={160} priority={priority} className={`logo-light ${className}`} aria-hidden="true" />
+    </>
   );
 }
 
 export function LogoFull({ className = '', priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <Image
-      src="/logo/km-gym-logo-400.png"
-      alt={`${site.name} logo`}
-      width={548}
-      height={400}
-      priority={priority}
-      className={className}
-    />
+    <>
+      <Image src="/logo/km-gym-logo-400.png" alt={`${site.name} logo`} width={548} height={400} priority={priority} className={`logo-dark ${className}`} />
+      <Image src="/logo/km-gym-logo-400-light.png" alt={`${site.name} logo`} width={548} height={400} priority={priority} className={`logo-light ${className}`} />
+    </>
   );
 }
 

@@ -31,5 +31,7 @@ Logo: `components/Logo.tsx` (dočasný monogram v štýle „Hanko“).
 
 ## Dizajn
 
+Tmavá téma je predvolená (značková), prepínač v hlavičke prepne na svetlú; voľba sa ukladá do `localStorage` (`km_theme`). Tokeny svetlej témy sú v `app/globals.css` pod `html[data-theme="light"]`, logo má svetlú variantu v `public/logo/*-light.png`.
+
 Farby: antracit `#131518` / `#0B0C0E`, červená `#C8102E`, biela. Nadpisy Bebas Neue, text Inter (self-hostované v `app/fonts`).
 Animácie rešpektujú `prefers-reduced-motion`.

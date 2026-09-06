@@ -196,21 +196,21 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       </section>
 
       {/* ------------------------------------------------------------- CTA */}
-      <section className="relative overflow-hidden bg-crimson-600 py-24 text-white md:py-32">
-        <div className="font-display pointer-events-none absolute -bottom-16 -left-4 select-none text-[30vw] leading-none text-white/10" aria-hidden="true">
+      <section className="relative overflow-hidden bg-crimson-600 py-24 text-[#fff] md:py-32">
+        <div className="font-display pointer-events-none absolute -bottom-16 -left-4 select-none text-[30vw] leading-none text-[#fff]/10" aria-hidden="true">
           KM
         </div>
         <div className="container relative z-10 mx-auto px-5 md:px-8">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12">
             <Reveal className="lg:col-span-8">
               <h2 className="font-display text-[3.6rem] leading-[0.9] md:text-[6.5rem]">{t.cta.title}</h2>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85">{t.cta.text}</p>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#fff]/85">{t.cta.text}</p>
             </Reveal>
             <Reveal delay={150} className="flex flex-col gap-4 sm:flex-row lg:col-span-4 lg:justify-end">
-              <Link href={localizedHref(locale, 'reservations')} className="btn btn-light">
+              <Link href={localizedHref(locale, 'reservations')} className="btn !bg-[#fff] !text-[#0b0c0e] !border-[#fff] btn-light">
                 {t.cta.primary}
               </Link>
-              <Link href={localizedHref(locale, 'contact')} className="btn btn-ghost !border-white/40 hover:!border-white">
+              <Link href={localizedHref(locale, 'contact')} className="btn btn-ghost !text-[#fff] !border-[#fff]/40 hover:!border-[#fff] hover:!text-[#0b0c0e]">
                 {t.cta.secondary}
               </Link>
             </Reveal>
