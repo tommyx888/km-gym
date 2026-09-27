@@ -19,6 +19,11 @@ export const routes = {
   membership: { sk: 'clenstvo', en: 'membership' },
   contact: { sk: 'kontakt', en: 'contact' },
   tracker: { sk: 'dennik', en: 'tracker' },
+  members: { sk: 'clenska-zona', en: 'members' },
+  login: { sk: 'prihlasenie', en: 'login' },
+  register: { sk: 'registracia', en: 'register' },
+  forgot: { sk: 'zabudnute-heslo', en: 'forgot-password' },
+  newPassword: { sk: 'nove-heslo', en: 'new-password' },
   legal: { sk: 'dokumenty', en: 'legal' },
 } as const;
 

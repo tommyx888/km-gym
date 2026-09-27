@@ -7,10 +7,11 @@ import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
 import ReservineButton from './ReservineButton';
+import AccountLink from './auth/AccountLink';
 import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
-type NavKey = Exclude<RouteKey, 'legal'>;
+type NavKey = Exclude<RouteKey, 'legal' | 'members' | 'login' | 'register' | 'forgot' | 'newPassword'>;
 const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'contact'];
 
 export default function Header({ locale }: { locale: Locale }) {
@@ -68,6 +69,7 @@ export default function Header({ locale }: { locale: Locale }) {
           ))}
           <LanguageSwitcher locale={locale} />
           <ThemeToggle labels={t.nav.theme} />
+          <AccountLink locale={locale} labels={{ login: t.nav.login, members: t.nav.members }} />
           <ReservineButton text={t.nav.cta} className="!py-3 !px-6" />
         </div>
 
@@ -128,8 +130,8 @@ export default function Header({ locale }: { locale: Locale }) {
           </ul>
           <div className="mt-auto flex flex-col gap-3">
             <ReservineButton text={t.nav.cta} className="w-full" />
-            <Link href={localizedHref(locale, 'membership')} className="btn btn-ghost w-full" onClick={() => setOpen(false)}>
-              {t.nav.membership}
+            <Link href={localizedHref(locale, 'login')} className="btn btn-ghost w-full" onClick={() => setOpen(false)}>
+              {t.nav.members}
             </Link>
           </div>
         </div>

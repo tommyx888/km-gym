@@ -4,8 +4,8 @@ import { legalDocs, localizedHref, type LegalKey, type Locale, type RouteKey } f
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
 
-type NavKey = Exclude<RouteKey, 'legal'>;
-const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'membership', 'contact'];
+type NavKey = Exclude<RouteKey, 'legal' | 'login' | 'register' | 'forgot' | 'newPassword'>;
+const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'membership', 'members', 'contact'];
 
 export default function Footer({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);

@@ -20,6 +20,10 @@ Texty webu sú v **`lib/i18n/dictionaries.ts`** (SK aj EN). Texty s `[DOPLNIŤ �
 Fotky galérie: nahraď `public/images/placeholder-*.svg` a uprav `site.gallery` v `lib/site.ts`. 360° video: `site.heroVideo`.
 Logo: `components/Logo.tsx` (dočasný monogram v štýle „Hanko“).
 
+## Členská zóna (Supabase Auth)
+
+Registrácia, prihlásenie, reset hesla, profil, oznamy, tréningové plány, pozývací kód do denníka. Nastavenie Supabase + Resend: **`docs/supabase-auth-setup.md`**, e-mailové šablóny v `docs/email-templates/`. Routy: `/sk/prihlasenie`, `/sk/registracia`, `/sk/zabudnute-heslo`, `/sk/nove-heslo`, `/sk/clenska-zona` (+ EN ekvivalenty), `/auth/callback`, `/auth/signout`.
+
 ## Štruktúra
 
 - `proxy.ts` – detekcia jazyka, redirect `/` → `/sk|/en`, prepis EN slugov (`/en/pricing` → interný `/en/cennik`)
