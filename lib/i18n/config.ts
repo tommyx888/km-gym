@@ -18,6 +18,7 @@ export const routes = {
   howItWorks: { sk: 'ako-to-funguje', en: 'how-it-works' },
   membership: { sk: 'clenstvo', en: 'membership' },
   contact: { sk: 'kontakt', en: 'contact' },
+  tracker: { sk: 'dennik', en: 'tracker' },
   legal: { sk: 'dokumenty', en: 'legal' },
 } as const;
 

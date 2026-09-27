@@ -5,7 +5,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
 
 type NavKey = Exclude<RouteKey, 'legal'>;
-const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'membership', 'contact'];
+const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'membership', 'contact'];
 
 export default function Footer({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);

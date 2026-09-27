@@ -11,7 +11,7 @@ import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/co
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
 type NavKey = Exclude<RouteKey, 'legal'>;
-const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'contact'];
+const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'contact'];
 
 export default function Header({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);

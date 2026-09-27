@@ -74,6 +74,15 @@ export const site = {
     membership: 'https://kmgym.reservine.me/branch/1/km-gym/reservation', // DOPLNIŤ – ak Reservine má samostatný link na kúpu členstva
   },
 
+  /**
+   * Tréningový denník pre členov (openGym, self-hosted). Prázdne url = stránka ukáže „pripravujeme“.
+   * Po nasadení: 'https://dennik.kmgym.sk'
+   */
+  tracker: {
+    url: '', // DOPLNIŤ po nasadení
+    repo: 'https://github.com/DuarteSantos8/openGym', // pôvodný projekt (AGPL v3) – DOPLNIŤ link na náš verejný fork
+  },
+
   /** Homepage: cesta k 360° videu interiéru (public/...). Prázdne = statické pozadie. */
   heroVideo: '', // DOPLNIŤ, napr. '/video/interier-360.mp4'
   heroPoster: '',
