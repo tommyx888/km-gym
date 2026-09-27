@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import GoogleMap from '@/components/GoogleMap';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
+import ReservineButton from '@/components/ReservineButton';
 import PlaceholderNote, { clean } from '@/components/PlaceholderNote';
-import { isLocale, localizedHref, type Locale } from '@/lib/i18n/config';
+import { isLocale, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
 
@@ -21,33 +21,39 @@ export default async function ContactPage({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : 'sk';
   const t = getDictionary(locale);
   const a = site.contact.address;
+  const o = site.operator;
 
-  const rows = [
+  const rows: { label: string; value: string; href?: string; note?: string; placeholder?: boolean }[] = [
     { label: t.contact.phone, value: site.contact.phone, href: site.contact.phoneHref },
-    { label: t.contact.email, value: site.contact.email, href: `mailto:${site.contact.email}` },
+    site.contact.email
+      ? { label: t.contact.email, value: site.contact.email, href: `mailto:${site.contact.email}` }
+      : { label: t.contact.email, value: '—', placeholder: true },
     { label: t.contact.address, value: `${a.street}, ${a.zip} ${a.city}` },
-    {
-      label: t.contact.hours,
-      value: site.hours.mode === 'always' ? t.contact.hoursAlways : site.hours.schedule.map((s) => `${s.days} ${s.time}`).join(' · '),
-      note: t.contact.hoursNote,
-    },
+    { label: t.contact.hours, value: t.contact.hoursAlways, note: t.contact.hoursNote },
   ];
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ExerciseGym',
     name: site.name,
-    telephone: site.contact.phone,
-    email: site.contact.email,
+    telephone: '+421903246453',
+    ...(site.contact.email ? { email: site.contact.email } : {}),
     url: site.domain,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: a.street,
-      addressLocality: a.city,
-      postalCode: a.zip,
-      addressCountry: 'SK',
+    foundingDate: String(site.foundedYear),
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
     },
-    sameAs: [site.social.instagram, site.social.facebook],
+    address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.city, postalCode: a.zip, addressCountry: 'SK' },
+    parentOrganization: {
+      '@type': 'Organization',
+      name: o.name,
+      vatID: o.icdph,
+      address: { '@type': 'PostalAddress', streetAddress: o.street, addressLocality: o.city, postalCode: o.zip, addressCountry: 'SK' },
+    },
+    ...(site.social.instagram || site.social.facebook ? { sameAs: [site.social.instagram, site.social.facebook].filter(Boolean) } : {}),
   };
 
   return (
@@ -70,7 +76,10 @@ export default async function ContactPage({ params }: Props) {
                             {row.value}
                           </a>
                         ) : (
-                          <span className="font-display text-[2rem] leading-none text-white md:text-[2.4rem]">{row.value}</span>
+                          <span className="font-display text-[2rem] leading-none text-white md:text-[2.4rem]">
+                            {row.value}
+                            {row.placeholder && <PlaceholderNote text="[DOPLNIŤ]" label={t.common.placeholderBadge} />}
+                          </span>
                         )}
                         {row.note && <p className="mt-2 text-sm text-mist">{row.note}</p>}
                       </dd>
@@ -80,15 +89,28 @@ export default async function ContactPage({ params }: Props) {
               </dl>
 
               <Reveal delay={400} className="mt-8">
-                <p className="eyebrow">{t.contact.social}</p>
+                <p className="eyebrow">
+                  {t.contact.social}
+                  {!site.social.instagram && !site.social.facebook && <PlaceholderNote text="[DOPLNIŤ]" label={t.common.placeholderBadge} />}
+                </p>
                 <div className="mt-4 flex gap-3">
-                  <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-                    Instagram
-                  </a>
-                  <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-                    Facebook
-                  </a>
+                  {site.social.instagram && (
+                    <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">Instagram</a>
+                  )}
+                  {site.social.facebook && (
+                    <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">Facebook</a>
+                  )}
                 </div>
+              </Reveal>
+
+              <Reveal delay={480} className="mt-10 border hairline p-6">
+                <p className="eyebrow">{t.contact.operatorTitle}</p>
+                <p className="mt-4 text-white">{o.name}</p>
+                <p className="mt-1 text-sm leading-relaxed text-mist">
+                  {o.street}, {o.zip} {o.city}
+                  <br />
+                  IČO: {o.ico} · DIČ: {o.dic} · IČ DPH: {o.icdph}
+                </p>
               </Reveal>
             </div>
 
@@ -113,9 +135,7 @@ export default async function ContactPage({ params }: Props) {
               <h2 className="font-display text-[3rem] leading-[0.92] text-white md:text-[4.4rem]">{t.contact.questionsTitle}</h2>
               <p className="mt-4 max-w-lg text-mist">{t.contact.questionsText}</p>
             </div>
-            <Link href={localizedHref(locale, 'reservations')} className="btn btn-primary">
-              {t.nav.cta}
-            </Link>
+            <ReservineButton text={t.nav.cta} />
           </Reveal>
         </div>
       </section>

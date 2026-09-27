@@ -1,22 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 type Theme = 'dark' | 'light';
 const KEY = 'km_theme';
 
+function getSnapshot(): Theme {
+  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+}
+function subscribe(cb: () => void) {
+  const mo = new MutationObserver(cb);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  return () => mo.disconnect();
+}
+
 /** Prepínač tmavá / svetlá. Predvolená je tmavá (značková); voľba sa ukladá do localStorage. */
 export default function ThemeToggle({ labels }: { labels: { dark: string; light: string } }) {
-  const [theme, setTheme] = useState<Theme>('dark');
-
-  useEffect(() => {
-    const current = document.documentElement.getAttribute('data-theme');
-    if (current === 'light') setTheme('light');
-  }, []);
+  const theme = useSyncExternalStore(subscribe, getSnapshot, () => 'dark' as Theme);
 
   const toggle = () => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
     document.documentElement.setAttribute('data-theme', next);
     try {
       localStorage.setItem(KEY, next);

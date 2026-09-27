@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
-import PlaceholderNote, { clean } from '@/components/PlaceholderNote';
-import { isLocale, localizedHref, type Locale } from '@/lib/i18n/config';
+import ReservineButton from '@/components/ReservineButton';
+import { isLocale, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { site } from '@/lib/site';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -18,40 +18,33 @@ export default async function AboutPage({ params }: Props) {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : 'sk';
   const t = getDictionary(locale);
+  const o = site.operator;
 
   return (
     <>
-      <PageHero eyebrow={t.about.eyebrow} title={t.about.title} lead={clean(t.about.lead)} />
+      <PageHero eyebrow={t.about.eyebrow} title={t.about.title} lead={t.about.lead} />
 
-      {/* Príbeh */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-5 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <Reveal className="lg:col-span-4">
               <p className="eyebrow">{t.about.story.title}</p>
               <div className="font-display mt-8 text-[7rem] leading-none text-ink-700 md:text-[10rem]" aria-hidden="true">
-                KM
+                24/7
               </div>
             </Reveal>
             <div className="space-y-6 text-lg leading-relaxed text-mist lg:col-span-7 lg:col-start-6">
               <Reveal>
-                <p className="text-white">
-                  {clean(t.about.story.p1)}
-                  <PlaceholderNote text={t.about.story.p1} label={t.common.placeholderBadge} />
-                </p>
+                <p className="text-white">{t.about.story.p1}</p>
               </Reveal>
               <Reveal delay={120}>
-                <p>
-                  {clean(t.about.story.p2)}
-                  <PlaceholderNote text={t.about.story.p2} label={t.common.placeholderBadge} />
-                </p>
+                <p>{t.about.story.p2}</p>
               </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Hodnoty */}
       <section className="border-y hairline bg-ink-950 py-20 grain md:py-32">
         <div className="container relative z-10 mx-auto px-5 md:px-8">
           <Reveal>
@@ -75,27 +68,22 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Pre koho */}
-      <section className="py-20 md:py-32">
+      <section className="py-20 md:py-28">
         <div className="container mx-auto px-5 md:px-8">
-          <Reveal>
-            <h2 className="font-display text-[3rem] leading-[0.92] text-white md:text-[4.6rem]">{t.about.forWhom.title}</h2>
-          </Reveal>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {t.about.forWhom.items.map((item, i) => (
-              <Reveal key={item.title} delay={i * 120}>
-                <div className="card h-full p-8 md:p-10">
-                  <h3 className="font-display text-[2.4rem] leading-none text-white">{item.title}</h3>
-                  <p className="mt-5 leading-relaxed text-mist">{item.text}</p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+            <Reveal className="lg:col-span-7">
+              <p className="eyebrow">{t.about.operatorTitle}</p>
+              <p className="font-display mt-6 text-[2.4rem] leading-none text-white">{o.name}</p>
+              <p className="mt-4 leading-relaxed text-mist">
+                {o.street}, {o.zip} {o.city}, {o.country}
+                <br />
+                IČO: {o.ico} · DIČ: {o.dic} · IČ DPH: {o.icdph}
+              </p>
+            </Reveal>
+            <Reveal delay={150} className="lg:col-span-5 lg:text-right">
+              <ReservineButton text={t.nav.cta} />
+            </Reveal>
           </div>
-          <Reveal delay={200} className="mt-14">
-            <Link href={localizedHref(locale, 'reservations')} className="btn btn-primary">
-              {t.cta.primary}
-            </Link>
-          </Reveal>
         </div>
       </section>
     </>

@@ -36,7 +36,9 @@ export type Reservation = {
   email: string;
   phone: string | null;
   date: string;
-  time: string;
+  time: string | null;
+  plan: string | null;
+  note: string | null;
   locale: string | null;
   status: 'pending' | 'confirmed' | 'cancelled';
   created_at: string;

@@ -4,8 +4,9 @@ import { getSupabaseAdmin, isSupabaseConfigured, RESERVATIONS_TABLE, supabase } 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_RE = /^\d{2}:\d{2}$/;
+const PLANS = ['monthly', 'quarterly', 'yearly', 'student', 'senior', 'single', 'ten'];
 
-/** POST – vytvorenie rezervácie (logika z pôvodnej verzie, pridaná validácia formátu a locale). */
+/** POST – prihláška za člena / rezervácia vstupu (pôvodná logika + plan, note, locale). */
 export async function POST(request: NextRequest) {
   try {
     if (!isSupabaseConfigured()) {
@@ -16,15 +17,18 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, email, phone, date, time, locale, company } = body ?? {};
+    const { name, email, phone, date, time, plan, note, locale, company } = body ?? {};
 
     // honeypot – tichý „úspech“, aby bot nevedel, že bol odhalený
     if (typeof company === 'string' && company.length > 0) {
       return NextResponse.json({ message: 'ok' }, { status: 201 });
     }
 
-    if (!name || !email || !date || !time) {
+    if (!name || !email || !date || (!time && !plan)) {
       return NextResponse.json({ error: 'Všetky povinné polia musia byť vyplnené' }, { status: 400 });
+    }
+    if (plan !== undefined && !PLANS.includes(String(plan))) {
+      return NextResponse.json({ error: 'Neplatný typ členstva' }, { status: 400 });
     }
     if (typeof name !== 'string' || name.trim().length < 2 || name.length > 120) {
       return NextResponse.json({ error: 'Neplatné meno' }, { status: 400 });
@@ -32,7 +36,7 @@ export async function POST(request: NextRequest) {
     if (typeof email !== 'string' || !EMAIL_RE.test(email) || email.length > 200) {
       return NextResponse.json({ error: 'Neplatná emailová adresa' }, { status: 400 });
     }
-    if (!DATE_RE.test(String(date)) || !TIME_RE.test(String(time))) {
+    if (!DATE_RE.test(String(date)) || (time && !TIME_RE.test(String(time)))) {
       return NextResponse.json({ error: 'Neplatný dátum alebo čas' }, { status: 400 });
     }
 
@@ -44,7 +48,9 @@ export async function POST(request: NextRequest) {
           email: email.trim().toLowerCase(),
           phone: phone ? String(phone).trim() : null,
           date,
-          time,
+          time: time || null,
+          plan: plan || null,
+          note: note ? String(note).slice(0, 500) : null,
           locale: locale === 'en' ? 'en' : 'sk',
         },
       ])

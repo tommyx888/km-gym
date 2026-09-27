@@ -21,3 +21,9 @@ ALTER TABLE public.km_gym_reservations ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "km_gym_public_insert" ON public.km_gym_reservations
   FOR INSERT TO anon, authenticated
   WITH CHECK (true);
+
+-- 9. 9. 2026 – prihláška za člena: čas voliteľný, typ členstva a poznámka
+ALTER TABLE public.km_gym_reservations ALTER COLUMN time DROP NOT NULL;
+ALTER TABLE public.km_gym_reservations ADD COLUMN IF NOT EXISTS plan TEXT
+  CHECK (plan IS NULL OR plan IN ('monthly','quarterly','yearly','student','senior','single','ten'));
+ALTER TABLE public.km_gym_reservations ADD COLUMN IF NOT EXISTS note TEXT CHECK (note IS NULL OR char_length(note) <= 500);

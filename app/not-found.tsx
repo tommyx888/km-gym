@@ -9,7 +9,7 @@ export default function NotFound() {
           <p className="font-display text-[8rem] leading-none text-crimson-600">404</p>
           <p className="mt-4 text-mist">Stránka neexistuje · Page not found</p>
           <Link href="/" className="btn btn-ghost mt-10">
-            KM Gym
+            KM GYM
           </Link>
         </div>
       </body>

@@ -13,25 +13,23 @@ export function isLocale(value: string | undefined): value is Locale {
 export const routes = {
   home: { sk: '', en: '' },
   about: { sk: 'o-nas', en: 'about' },
-  gallery: { sk: 'galeria', en: 'gallery' },
+  equipment: { sk: 'vybavenie', en: 'equipment' },
   pricing: { sk: 'cennik', en: 'pricing' },
-  reservations: { sk: 'rezervacie', en: 'reservations' },
+  howItWorks: { sk: 'ako-to-funguje', en: 'how-it-works' },
+  membership: { sk: 'clenstvo', en: 'membership' },
   contact: { sk: 'kontakt', en: 'contact' },
+  legal: { sk: 'dokumenty', en: 'legal' },
 } as const;
 
 export type RouteKey = keyof typeof routes;
 
-/** Interný (SK) názov priečinka pre danú routu. */
-export const internalSlug: Record<RouteKey, string> = Object.fromEntries(
-  Object.entries(routes).map(([k, v]) => [k, v.sk]),
-) as Record<RouteKey, string>;
-
-export function localizedHref(locale: Locale, key: RouteKey): string {
+export function localizedHref(locale: Locale, key: RouteKey, sub?: string): string {
   const slug = routes[key][locale];
-  return slug ? `/${locale}/${slug}` : `/${locale}`;
+  const base = slug ? `/${locale}/${slug}` : `/${locale}`;
+  return sub ? `${base}/${sub}` : base;
 }
 
-/** Pre EN: mapa lokalizovaný slug → interný slug (na rewrite v proxy). */
+/** Pre EN: lokalizovaný slug → interný (SK) slug, na rewrite v proxy. */
 export function toInternalPath(locale: Locale, pathname: string): string | null {
   if (locale === defaultLocale) return null;
   const rest = pathname.replace(new RegExp(`^/${locale}/?`), '');
@@ -45,11 +43,18 @@ export function toInternalPath(locale: Locale, pathname: string): string | null 
   return null;
 }
 
-/** Nájde RouteKey podľa interného pathname (bez locale), na prepínanie jazyka. */
-export function routeKeyFromInternalPath(pathWithoutLocale: string): RouteKey {
-  const first = pathWithoutLocale.replace(/^\//, '').split('/')[0] ?? '';
-  for (const key of Object.keys(routes) as RouteKey[]) {
-    if (routes[key].sk === first) return key;
+/** Právne dokumenty – slug podľa jazyka. */
+export const legalDocs = {
+  terms: { sk: 'obchodne-podmienky', en: 'terms' },
+  privacy: { sk: 'ochrana-osobnych-udajov', en: 'privacy' },
+  cookies: { sk: 'cookies', en: 'cookies' },
+  complaints: { sk: 'reklamacny-poriadok', en: 'complaints' },
+} as const;
+export type LegalKey = keyof typeof legalDocs;
+
+export function legalKeyFromSlug(slug: string): LegalKey | null {
+  for (const key of Object.keys(legalDocs) as LegalKey[]) {
+    if (Object.values(legalDocs[key]).includes(slug as never)) return key;
   }
-  return 'home';
+  return null;
 }

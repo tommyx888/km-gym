@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import StickyCta from '@/components/StickyCta';
 import { isLocale, locales, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
           {children}
         </main>
         <Footer locale={locale} />
+        <StickyCta text={t.nav.cta} />
       </body>
     </html>
   );

@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import ReservineButton from './ReservineButton';
 import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
-const NAV: RouteKey[] = ['home', 'about', 'gallery', 'pricing', 'reservations', 'contact'];
+type NavKey = Exclude<RouteKey, 'legal'>;
+const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'contact'];
 
 export default function Header({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -37,7 +39,7 @@ export default function Header({ locale }: { locale: Locale }) {
     };
   }, [open]);
 
-  const isActive = (key: RouteKey) => {
+  const isActive = (key: NavKey) => {
     const href = localizedHref(locale, key);
     if (key === 'home') return pathname === href || pathname === `/${locale}/`;
     // pathname môže byť lokalizovaný (/en/pricing) alebo interný (/en/cennik)
@@ -53,12 +55,12 @@ export default function Header({ locale }: { locale: Locale }) {
         <Logo href={localizedHref(locale, 'home')} priority />
 
         {/* Desktop */}
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex xl:gap-8">
           {NAV.map((key) => (
             <Link
               key={key}
               href={localizedHref(locale, key)}
-              className="nav-link"
+              className="nav-link whitespace-nowrap"
               aria-current={isActive(key) ? 'page' : undefined}
             >
               {t.nav[key]}
@@ -66,9 +68,7 @@ export default function Header({ locale }: { locale: Locale }) {
           ))}
           <LanguageSwitcher locale={locale} />
           <ThemeToggle labels={t.nav.theme} />
-          <Link href={localizedHref(locale, 'reservations')} className="btn btn-primary !py-3 !px-6">
-            {t.nav.cta}
-          </Link>
+          <ReservineButton text={t.nav.cta} className="!py-3 !px-6" />
         </div>
 
         {/* Mobile toggle */}
@@ -126,13 +126,12 @@ export default function Header({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
-          <Link
-            href={localizedHref(locale, 'reservations')}
-            className="btn btn-primary mt-auto w-full"
-            onClick={() => setOpen(false)}
-          >
-            {t.nav.cta}
-          </Link>
+          <div className="mt-auto flex flex-col gap-3">
+            <ReservineButton text={t.nav.cta} className="w-full" />
+            <Link href={localizedHref(locale, 'membership')} className="btn btn-ghost w-full" onClick={() => setOpen(false)}>
+              {t.nav.membership}
+            </Link>
+          </div>
         </div>
       </div>
     </header>

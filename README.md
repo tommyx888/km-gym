@@ -15,18 +15,18 @@ zo Supabase dashboardu, ak chceš čítať rezervácie cez `GET /api/reservation
 
 ## Čo doplniť (placeholdery)
 
-Všetky fakty sú na jednom mieste: **`lib/site.ts`** (telefón, e-mail, adresa, ceny, hodiny, štatistiky, sociálne siete, rok založenia).
-Texty webu sú v **`lib/i18n/dictionaries.ts`** (SK aj EN). Texty s `[PLACEHOLDER …]` sa na webe zobrazia so štítkom „Doplniť“ – po prepísaní štítok sám zmizne.
-Fotky galérie: nahraď `public/images/placeholder-*.svg` a uprav zoznam v `app/[locale]/galeria/page.tsx`.
+Všetky fakty sú na jednom mieste: **`lib/site.ts`** (telefón, e-mail, adresa, prevádzkovateľ, ceny, sociálne siete, 360° video, fotky galérie). Chýba: e-mail, Instagram, Facebook, doména, video, fotky.
+Texty webu sú v **`lib/i18n/dictionaries.ts`** (SK aj EN). Texty s `[DOPLNIŤ …]` sa na webe zobrazia so štítkom „Doplniť“ – po prepísaní štítok sám zmizne.
+Fotky galérie: nahraď `public/images/placeholder-*.svg` a uprav `site.gallery` v `lib/site.ts`. 360° video: `site.heroVideo`.
 Logo: `components/Logo.tsx` (dočasný monogram v štýle „Hanko“).
 
 ## Štruktúra
 
 - `proxy.ts` – detekcia jazyka, redirect `/` → `/sk|/en`, prepis EN slugov (`/en/pricing` → interný `/en/cennik`)
-- `app/[locale]/…` – stránky (home, o-nas, galeria, cennik, rezervacie, kontakt)
-- `app/api/reservations` – POST (vloženie rezervácie cez anon kľúč, RLS), GET (service-role)
+- `app/[locale]/…` – stránky (home, o-nas, vybavenie, cennik, ako-to-funguje, clenstvo, kontakt, dokumenty/[slug])
+- `app/api/reservations` – POST (prihláška za člena / vstup; anon kľúč + RLS), GET (service-role)
 - `lib/i18n/config.ts` – locales, lokalizované slugy, `localizedHref()`
-- `components/` – Header, Footer, Logo, Reveal (scroll animácie), Counter, Marquee, Gallery, ReservationForm, GoogleMap
+- `components/` – Header, Footer, Logo, Reveal (scroll animácie), Counter, Marquee, Gallery, MembershipForm, GoogleMap, ThemeToggle
 - `supabase/schema.sql` – tabuľka `km_gym_reservations` (už aplikovaná v projekte `mqrpjdgrrkkdbdkrbdgg`)
 
 ## Dizajn

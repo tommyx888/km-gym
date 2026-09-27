@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
     short_name: site.shortName,
-    description: 'KM Gym',
+    description: 'Fitness 24/7 v Kuchyni',
     start_url: '/',
     display: 'standalone',
     background_color: '#131518',

@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { locales, localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
+import { legalDocs, legalKeyFromSlug, locales, localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
 
 /** Prepínač SK | EN – zachová aktuálnu stránku (prekladá slug). */
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
-  const first = pathname.replace(new RegExp(`^/${locale}/?`), '').split('/')[0] ?? '';
+  const parts = pathname.replace(new RegExp(`^/${locale}/?`), '').split('/');
+  const first = parts[0] ?? '';
+  const legalKey = parts[1] ? legalKeyFromSlug(parts[1]) : null;
 
   let key: RouteKey = 'home';
   for (const k of Object.keys(routes) as RouteKey[]) {
@@ -23,7 +25,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         <span key={l} className="flex items-center gap-2">
           {i > 0 && <span className="h-3 w-px bg-ink-600" aria-hidden="true" />}
           <Link
-            href={localizedHref(l, key)}
+            href={key === 'legal' && legalKey ? localizedHref(l, 'legal', legalDocs[legalKey][l]) : localizedHref(l, key)}
             hrefLang={l}
             lang={l}
             aria-current={l === locale ? 'true' : undefined}

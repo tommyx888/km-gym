@@ -39,7 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# lokálne
-_to_delete/
-tsconfig.tsbuildinfo
