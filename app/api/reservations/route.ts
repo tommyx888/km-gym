@@ -4,7 +4,7 @@ import { getSupabaseAdmin, isSupabaseConfigured, RESERVATIONS_TABLE, supabase } 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const TIME_RE = /^\d{2}:\d{2}$/;
-const PLANS = ['monthly', 'quarterly', 'yearly', 'student', 'senior', 'single', 'ten'];
+const PLANS = ['monthly', 'quarterly', 'yearly', 'student', 'single', 'ten'];
 
 /** POST – prihláška za člena / rezervácia vstupu (pôvodná logika + plan, note, locale). */
 export async function POST(request: NextRequest) {

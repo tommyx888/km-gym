@@ -52,7 +52,6 @@ export const site = {
       { key: 'quarterly', price: 109, featured: false },
       { key: 'yearly', price: 429, featured: false },
       { key: 'student', price: 32, featured: false },
-      { key: 'senior', price: 32, featured: false },
     ],
     passes: [
       { key: 'single', price: 5 },

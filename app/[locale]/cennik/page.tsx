@@ -39,7 +39,7 @@ export default async function PricingPage({ params }: Props) {
           <Reveal>
             <h2 className="eyebrow">{t.pricing.membershipsTitle}</h2>
           </Reveal>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-5">
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             {site.pricing.plans.map((plan, i) => {
               const d = t.pricing.plans[plan.key];
               return (

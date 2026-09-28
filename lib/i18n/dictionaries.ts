@@ -62,15 +62,15 @@ const sk = {
       { title: 'Kardio zóna', text: 'Bežecké pásy, bicykle a veslovanie na kondíciu a rozohriatie.' },
       { title: 'Funkčná zóna', text: 'Priestor na funkčný tréning, mobilitu a prácu s vlastnou váhou.' },
       { title: 'Športová príprava', text: 'Priestor pre bojové a športové disciplíny a individuálnu prípravu.' },
-      { title: 'Dostupné členstvo', text: 'Od 39 € mesačne, bez skrytých poplatkov. Študenti a seniori za 32 €. Tréningový denník v cene.' },
+      { title: 'Dostupné členstvo', text: 'Od 39 € mesačne, bez skrytých poplatkov. Študenti za 32 €. Tréningový denník v cene.' },
       { title: 'Bez recepcie a kľúčov', text: 'Rezervácia, platba a vstup v jednom. Pred začiatkom ti príde PIN, ktorý platí počas tvojej rezervácie.' },
     ],
   },
   forWhom: {
     eyebrow: 'Pre koho',
     title: 'Pre každého, kto to myslí vážne.',
-    text: 'Pre začiatočníkov, pravidelne cvičiacich, športovcov, ženy, mužov, študentov aj seniorov. Jedno miesto, jeden PIN, žiadne výhovorky.',
-    items: ['Začiatočníci', 'Pravidelne cvičiaci', 'Športovci', 'Študenti', 'Seniori'],
+    text: 'Pre začiatočníkov, pravidelne cvičiacich, športovcov, ženy, mužov, študentov. Jedno miesto, jeden PIN, žiadne výhovorky.',
+    items: ['Začiatočníci', 'Pravidelne cvičiaci', 'Športovci', 'Študenti'],
   },
   tour: {
     eyebrow: 'Priestor',
@@ -93,7 +93,7 @@ const sk = {
     story: {
       title: 'O KM GYM',
       p1: 'KM GYM ponúka priestor a vybavenie pre silový tréning, kondičné cvičenie, kardio a funkčný tréning. Bez recepcie a bez kľúčov – rezervuješ online a trénuješ vtedy, keď ti to sedí.',
-      p2: 'Vznikli sme v roku 2026 s jednoduchou myšlienkou: kvalitné fitko priamo v obci, aby nikto nemusel dochádzať do mesta. Pre začiatočníkov, pravidelne cvičiacich, športovcov, ženy, mužov, študentov aj seniorov.',
+      p2: 'Vznikli sme v roku 2026 s jednoduchou myšlienkou: kvalitné fitko priamo v obci, aby nikto nemusel dochádzať do mesta. Pre začiatočníkov, pravidelne cvičiacich, športovcov, ženy, mužov aj študentov.',
     },
     values: {
       title: 'Na čom stojíme',
@@ -140,7 +140,7 @@ const sk = {
   },
   pricing: {
     metaTitle: 'Cenník — KM GYM',
-    metaDescription: 'Členstvo KM GYM od 39 € mesačne. Neobmedzený vstup 24/7. Študenti a seniori 32 €. Jednorazový vstup 5 €.',
+    metaDescription: 'Členstvo KM GYM od 39 € mesačne. Neobmedzený vstup 24/7. Študenti 32 €. Jednorazový vstup 5 €.',
     eyebrow: 'Cenník',
     title: 'Jedna cena. Žiadne prekvapenia.',
     lead: 'Každé členstvo zahŕňa neobmedzený vstup 24/7 a celé vybavenie. Platba kartou online, vstup cez PIN.',
@@ -152,7 +152,6 @@ const sk = {
       quarterly: { title: '3-mesačné členstvo', period: '/ 3 mesiace', note: 'Neobmedzený vstup 24/7.' },
       yearly: { title: 'Ročné členstvo', period: '/ rok', note: 'Neobmedzený vstup 24/7.' },
       student: { title: 'Študent', period: '/ mesiac', note: 'Pre študentov do 19 rokov.' },
-      senior: { title: 'Senior', period: '/ mesiac', note: 'Neobmedzený vstup 24/7.' },
     },
     passes: {
       single: { title: 'Jednorazový vstup', note: 'Jeden tréning, celé vybavenie.' },
@@ -161,7 +160,7 @@ const sk = {
     included: ['Neobmedzený vstup 24/7', 'Silová, kardio a funkčná zóna', 'Šatne a sprchy', 'Bez zmluvy a skrytých poplatkov'],
     cta: 'Kúpiť členstvo',
     passCta: 'Rezervovať',
-    note: 'Ceny sú uvedené s DPH. [DOPLNIŤ – spôsob platby, podmienky študentskej a seniorskej zľavy]',
+    note: 'Ceny sú uvedené s DPH. [DOPLNIŤ – spôsob platby, podmienky študentskej zľavy]',
   },
   howItWorks: {
     metaTitle: 'Ako to funguje — KM GYM',
@@ -181,7 +180,7 @@ const sk = {
       { q: 'Môžem prísť bez členstva?', a: 'Áno. Jednorazový vstup stojí 5 €, 10 vstupov 45 €. Rezervuješ a zaplatíš online rovnako ako členovia.' },
       { q: 'Čo ak rezerváciu zruším?', a: 'PIN sa automaticky zneplatní. [DOPLNIŤ – storno podmienky a vrátenie platby]' },
       { q: 'Je členstvo viazané zmluvou?', a: 'Nie. Platíš za zvolené obdobie dopredu, bez viazanosti.' },
-      { q: 'Kto má nárok na študentskú a seniorskú cenu?', a: 'Študenti do 19 rokov a seniori. [DOPLNIŤ – vek seniora, doklad]' },
+      { q: 'Kto má nárok na študentskú cenu?', a: 'Študenti do 19 rokov. [DOPLNIŤ – doklad, napr. ISIC alebo potvrdenie o štúdiu]' },
       { q: 'Sú k dispozícii šatne a sprchy?', a: 'Áno, šatne aj sprchy sú k dispozícii nonstop.' },
     ],
     cta: 'Rezervovať',
@@ -438,15 +437,15 @@ const en: typeof sk = {
       { title: 'Cardio zone', text: 'Treadmills, bikes and rowers for conditioning and warm-ups.' },
       { title: 'Functional zone', text: 'Open space for functional training, mobility and bodyweight work.' },
       { title: 'Sports preparation', text: 'Space for combat sports and individual athletic preparation.' },
-      { title: 'Affordable membership', text: 'From €39 a month, no hidden fees. Students and seniors €32. Training log included.' },
+      { title: 'Affordable membership', text: 'From €39 a month, no hidden fees. Students €32. Training log included.' },
       { title: 'No reception, no keys', text: 'Booking, payment and entry in one. Before your session you receive a PIN valid for your booking.' },
     ],
   },
   forWhom: {
     eyebrow: 'Who it’s for',
     title: 'For everyone who means it.',
-    text: 'Beginners, regulars, athletes, women, men, students and seniors. One place, one PIN, no excuses.',
-    items: ['Beginners', 'Regulars', 'Athletes', 'Students', 'Seniors'],
+    text: 'Beginners, regulars, athletes, women, men, students. One place, one PIN, no excuses.',
+    items: ['Beginners', 'Regulars', 'Athletes', 'Students'],
   },
   tour: {
     eyebrow: 'The space',
@@ -469,7 +468,7 @@ const en: typeof sk = {
     story: {
       title: 'About KM GYM',
       p1: 'KM GYM offers space and equipment for strength training, conditioning, cardio and functional training. No reception and no keys – you book online and train when it suits you.',
-      p2: 'We opened in 2026 with a simple idea: a quality gym right in the village, so nobody has to commute to the city. For beginners, regulars, athletes, women, men, students and seniors.',
+      p2: 'We opened in 2026 with a simple idea: a quality gym right in the village, so nobody has to commute to the city. For beginners, regulars, athletes, women, men and students.',
     },
     values: {
       title: 'What we stand on',
@@ -516,7 +515,7 @@ const en: typeof sk = {
   },
   pricing: {
     metaTitle: 'Pricing — KM GYM',
-    metaDescription: 'KM GYM membership from €39 a month. Unlimited 24/7 access. Students and seniors €32. Day pass €5.',
+    metaDescription: 'KM GYM membership from €39 a month. Unlimited 24/7 access. Students €32. Day pass €5.',
     eyebrow: 'Pricing',
     title: 'One price. No surprises.',
     lead: 'Every membership includes unlimited 24/7 access and the full floor. Pay by card online, enter with a PIN.',
@@ -528,7 +527,6 @@ const en: typeof sk = {
       quarterly: { title: '3-month membership', period: '/ 3 months', note: 'Unlimited 24/7 access.' },
       yearly: { title: 'Annual membership', period: '/ year', note: 'Unlimited 24/7 access.' },
       student: { title: 'Student', period: '/ month', note: 'For students up to 19 years.' },
-      senior: { title: 'Senior', period: '/ month', note: 'Unlimited 24/7 access.' },
     },
     passes: {
       single: { title: 'Day pass', note: 'One session, full equipment.' },
@@ -537,7 +535,7 @@ const en: typeof sk = {
     included: ['Unlimited 24/7 access', 'Strength, cardio and functional zones', 'Locker rooms and showers', 'No contract, no hidden fees'],
     cta: 'Buy membership',
     passCta: 'Book now',
-    note: 'Prices include VAT. [DOPLNIŤ – payment methods, student and senior discount terms]',
+    note: 'Prices include VAT. [DOPLNIŤ – payment methods, student discount terms]',
   },
   howItWorks: {
     metaTitle: 'How it works — KM GYM',
@@ -557,7 +555,7 @@ const en: typeof sk = {
       { q: 'Can I come without a membership?', a: 'Yes. A day pass is €5, 10 visits €45. Book and pay online just like members.' },
       { q: 'What if I cancel?', a: 'The PIN is invalidated automatically. [DOPLNIŤ – cancellation and refund terms]' },
       { q: 'Is there a contract?', a: 'No. You pay for the chosen period in advance, no lock-in.' },
-      { q: 'Who qualifies for student and senior pricing?', a: 'Students up to 19 and seniors. [DOPLNIŤ – senior age, ID]' },
+      { q: 'Who qualifies for student pricing?', a: 'Students up to 19. [DOPLNIŤ – proof, e.g. ISIC or school confirmation]' },
       { q: 'Are there locker rooms and showers?', a: 'Yes, both are available nonstop.' },
     ],
     cta: 'Book now',

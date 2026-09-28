@@ -25,7 +25,7 @@ CREATE POLICY "km_gym_public_insert" ON public.km_gym_reservations
 -- 9. 9. 2026 – prihláška za člena: čas voliteľný, typ členstva a poznámka
 ALTER TABLE public.km_gym_reservations ALTER COLUMN time DROP NOT NULL;
 ALTER TABLE public.km_gym_reservations ADD COLUMN IF NOT EXISTS plan TEXT
-  CHECK (plan IS NULL OR plan IN ('monthly','quarterly','yearly','student','senior','single','ten'));
+  CHECK (plan IS NULL OR plan IN ('monthly','quarterly','yearly','student','single','ten'));
 ALTER TABLE public.km_gym_reservations ADD COLUMN IF NOT EXISTS note TEXT CHECK (note IS NULL OR char_length(note) <= 500);
 
 -- 27. 9. 2026 – členská zóna: migrácie km_gym_members_zone + km_gym_members_zone_hardening (aplikované).
