@@ -20,6 +20,7 @@ export const routes = {
   contact: { sk: 'kontakt', en: 'contact' },
   tracker: { sk: 'dennik', en: 'tracker' },
   members: { sk: 'clenska-zona', en: 'members' },
+  admin: { sk: 'admin', en: 'admin' },
   login: { sk: 'prihlasenie', en: 'login' },
   register: { sk: 'registracia', en: 'register' },
   forgot: { sk: 'zabudnute-heslo', en: 'forgot-password' },

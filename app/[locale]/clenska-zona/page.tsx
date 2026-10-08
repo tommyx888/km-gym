@@ -164,11 +164,20 @@ export default async function MembersPage({ params, searchParams }: Props) {
               </Reveal>
 
               <Reveal delay={240}>
-                <form action="/auth/signout" method="post" className="flex justify-end">
-                  <button type="submit" className="nav-link !text-[0.7rem]">
-                    {t.auth.signOut}
-                  </button>
-                </form>
+                <div className="flex items-center justify-between gap-4">
+                  {profile?.is_admin ? (
+                    <Link href={localizedHref(locale, 'admin')} className="btn btn-ghost !px-5 !py-3 !text-[0.65rem]">
+                      {t.admin.membersLink} →
+                    </Link>
+                  ) : (
+                    <span />
+                  )}
+                  <form action="/auth/signout" method="post">
+                    <button type="submit" className="nav-link !text-[0.7rem]">
+                      {t.auth.signOut}
+                    </button>
+                  </form>
+                </div>
               </Reveal>
             </div>
           </div>

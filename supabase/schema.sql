@@ -31,3 +31,10 @@ ALTER TABLE public.km_gym_reservations ADD COLUMN IF NOT EXISTS note TEXT CHECK 
 -- 27. 9. 2026 – členská zóna: migrácie km_gym_members_zone + km_gym_members_zone_hardening (aplikované).
 -- Tabuľky: km_gym_profiles (1:1 auth.users, trigger km_gym_handle_new_user), km_gym_announcements, km_gym_plans.
 -- RLS: člen len vlastný profil (bez zmeny statusu/kódu/admin), oznamy+plány len authenticated, admin cez km_gym_is_admin().
+
+-- 8. 10. 2026 – admin sekcia (migrácie km_gym_admin_profiles_email + ručne aplikované triggery/policy)
+ALTER TABLE public.km_gym_profiles ADD COLUMN IF NOT EXISTS email TEXT;  -- kópia auth.users.email (admin ju potrebuje vidieť)
+-- km_gym_handle_new_user(): kopíruje NEW.email, is_admin = lower(email) IN ('t.ficek@gmail.com')
+-- km_gym_sync_user_email() + trigger km_gym_on_auth_user_email AFTER UPDATE OF email ON auth.users → profil
+-- policy km_gym_profiles_update_own: člen nemôže meniť ani stĺpec email
+-- UPDATE km_gym_profiles SET is_admin = true WHERE lower(email) = 't.ficek@gmail.com';

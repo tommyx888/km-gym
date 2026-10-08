@@ -11,7 +11,7 @@ import AccountLink from './auth/AccountLink';
 import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
-type NavKey = Exclude<RouteKey, 'legal' | 'members' | 'login' | 'register' | 'forgot' | 'newPassword'>;
+type NavKey = Exclude<RouteKey, 'legal' | 'members' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
 const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'contact'];
 
 export default function Header({ locale }: { locale: Locale }) {

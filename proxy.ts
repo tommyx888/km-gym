@@ -44,7 +44,8 @@ export async function proxy(request: NextRequest) {
 
     // Supabase session (obnova cookies) + ochrana členskej zóny
     const { response, user } = await updateSession(request, base);
-    const isMembers = internalPath.startsWith(`/${maybeLocale}/${routes.members.sk}`);
+    const isMembers =
+      internalPath.startsWith(`/${maybeLocale}/${routes.members.sk}`) || internalPath.startsWith(`/${maybeLocale}/${routes.admin.sk}`);
     const isAuthPage = [routes.login, routes.register].some((r) => internalPath.startsWith(`/${maybeLocale}/${r.sk}`));
     if (isMembers && !user) {
       const url = request.nextUrl.clone();
