@@ -4,6 +4,7 @@ import { site } from '../site';
 const o = site.operator;
 const email = site.contact.email || 'info@kmgym.sk';
 const phone = site.contact.phone;
+const person = site.contact.person;
 const gym = `${site.contact.address.street}, ${site.contact.address.zip} ${site.contact.address.city}`;
 const operator = `${o.name}, so sídlom ${o.street}, ${o.zip} ${o.city}, IČO: ${o.ico}, DIČ: ${o.dic}, IČ DPH: ${o.icdph}, zapísaná v Obchodnom registri Mestského súdu Bratislava III`;
 const L = site.legal;
@@ -11,95 +12,115 @@ const L = site.legal;
 export const sk: LegalContent = {
   /* ------------------------------------------------------------------ VOP */
   terms: {
-    title: 'Všeobecné obchodné podmienky',
-    lead: `Podmienky používania fitnescentra KM GYM a nákupu členstiev a vstupov. Účinné od ${new Date(L.effectiveDate).toLocaleDateString('sk-SK')}.`,
+    title: 'Členské a obchodné podmienky',
+    lead: `Podmienky kúpy a využívania členstva a vstupov do fitness centra KM GYM. Prevádzkovateľ: ${o.name}. Dátum vyhotovenia: 26. október 2026.`,
     sections: [
       {
-        h: '1. Prevádzkovateľ a kontakt',
-        p: [
-          `Prevádzkovateľom fitnescentra KM GYM na adrese ${gym} (ďalej „fitnescentrum“) a predávajúcim je ${operator} (ďalej „prevádzkovateľ“).`,
-          `Kontakt: ${email}, ${phone}. Orgán dozoru: Slovenská obchodná inšpekcia, Inšpektorát SOI pre Bratislavský kraj, Bajkalská 21/A, P. O. BOX 5, 820 07 Bratislava 27.`,
-        ],
-      },
-      {
-        h: '2. Služby a ceny',
-        p: [
-          'Prevádzkovateľ poskytuje prístup do fitnescentra a k jeho vybaveniu nonstop (24 hodín denne, 7 dní v týždni) na základe zakúpeného členstva (neobmedzený vstup na zvolené obdobie) alebo vstupu (jednorazový vstup, resp. permanentka na 10 vstupov).',
-          'Aktuálne ceny sú uvedené v cenníku na webe kmgym.sk a v rezervačnom systéme. Všetky ceny sú konečné a uvedené vrátane DPH. Študentská cena platí pre študentov do 19 rokov po predložení dokladu o štúdiu pri prvej návšteve.',
-          'Ak je pri cene uvedená zľava, uvádza sa aj najnižšia cena, za ktorú bola služba ponúkaná počas 30 dní pred poskytnutím zľavy.',
-        ],
-      },
-      {
-        h: '3. Objednávka a uzavretie zmluvy',
-        p: [
-          'Členstvá a vstupy sa kupujú online v rezervačnom systéme Reservine (kmgym.reservine.me), ktorý prevádzkovateľ využíva ako technického sprostredkovateľa. Pred odoslaním objednávky má kupujúci možnosť skontrolovať a zmeniť zadané údaje a oboznámiť sa s týmito podmienkami. Objednávka sa potvrdzuje tlačidlom s jasným označením, že s objednávkou je spojená povinnosť platby.',
-          'Zmluva je uzavretá okamihom potvrdenia platby. Potvrdenie objednávky a daňový doklad sa zasielajú elektronicky na e-mail kupujúceho.',
-          `Zmluvu môže samostatne uzavrieť osoba staršia ako ${L.minAgeMembership} rokov. Za mladšie osoby uzatvára zmluvu zákonný zástupca, ktorý zodpovedá za dodržiavanie prevádzkového poriadku.`,
-        ],
-      },
-      {
-        h: '4. Platba',
-        p: [
-          'Platba prebieha online platobnou kartou cez zabezpečenú platobnú bránu rezervačného systému. Prevádzkovateľ nemá prístup k údajom o platobnej karte.',
-          'Členstvo alebo vstup je aktívny ihneď po pripísaní platby, od tohto momentu plynie jeho platnosť.',
-        ],
-      },
-      {
-        h: '5. Platnosť členstva a vstupov',
+        h: '1. Identifikácia prevádzkovateľa',
         ul: [
-          'Mesačné členstvo platí 30 dní, 3‑mesačné 90 dní a ročné 365 dní odo dňa aktivácie. Členstvo sa neobnovuje automaticky a nie je spojené so žiadnou viazanosťou – po skončení si člen kupuje nové členstvo sám.',
-          'Jednorazový vstup platí na jednu návštevu v rezervovanom čase. Permanentka na 10 vstupov platí 12 mesiacov od zakúpenia.',
-          'Členstvo aj vstupy sú viazané na osobu kupujúceho a sú neprenosné. Nevyužité obdobie ani vstupy sa nevracajú, s výnimkou prípadov uvedených v týchto podmienkach alebo v zákone.',
-          'Prevádzkovateľ môže platnosť členstva primerane predĺžiť, ak bolo fitnescentrum z dôvodov na jeho strane zatvorené viac ako 3 po sebe idúce dni.',
+          `Obchodné meno: ${o.name}`,
+          `Sídlo: ${o.street}, ${o.zip} ${o.city}`,
+          `IČO: ${o.ico.replace(/\s/g, '')} | DIČ: ${o.dic} | IČ DPH: ${o.icdph}`,
+          `Prevádzka: KM GYM, ${gym}`,
+          `Kontaktná osoba: ${person}`,
+          `E‑mail: ${email} | Telefón: ${phone}`,
+          'Webová stránka: https://www.kmgym.sk/sk',
         ],
+        p: ['V týchto podmienkach sa West road s.r.o. označuje ako „prevádzkovateľ“ a osoba, ktorá si kúpi alebo využíva službu KM GYM, ako „zákazník“.'],
       },
       {
-        h: '6. Rezervácia a vstup do fitnescentra',
+        h: '2. Rozsah a uzatvorenie zmluvy',
         p: [
-          'Fitnescentrum nemá recepciu. Každej návšteve predchádza rezervácia termínu v rezervačnom systéme (pre členov bezplatná). Pred začiatkom rezervácie dostane návštevník SMS a e‑mailom jednorazový PIN kód, ktorý zadá na klávesnici zámku vstupných dverí. PIN platí výlučne počas rezervovaného času a je osobný – jeho poskytnutie inej osobe alebo vpustenie cudzej osoby do priestorov je porušením týchto podmienok.',
-          'Rezerváciu je možné bezplatne zrušiť alebo presunúť najneskôr 2 hodiny pred jej začiatkom. Pri zrušení sa jednorazový vstup alebo vstup z permanentky vráti na účet kupujúceho; členstvo nie je zrušením dotknuté. Pri neskoršom zrušení alebo nedostavení sa vstup prepadá.',
+          'Tieto podmienky upravujú kúpu a využívanie členstva a vstupov do fitness centra KM GYM. Pred nákupom má zákazník k dispozícii informácie o zvolenej službe, cene, dobe platnosti a spôsobe prístupu.',
+          'Zmluva sa uzatvára objednaním konkrétnej služby a jej zaplatením alebo potvrdením iného prevádzkovateľom povoleného spôsobu úhrady. Pri online objednávke musí byť pred odoslaním objednávky zrozumiteľne uvedená celková cena a skutočnosť, že objednávka zakladá povinnosť zaplatiť.',
+          'Zákazník je povinný uviesť pravdivé a aktuálne údaje. Potvrdenie objednávky a informácie o zakúpenej službe sa poskytujú prostredníctvom systému, e‑mailu alebo iným vhodným elektronickým spôsobom.',
         ],
       },
       {
-        h: '7. Odstúpenie od zmluvy (14 dní)',
-        p: [
-          'Kupujúci, ktorý je spotrebiteľom, má právo odstúpiť od zmluvy uzavretej na diaľku bez uvedenia dôvodu do 14 dní odo dňa uzavretia zmluvy. Odstúpenie môže zaslať e‑mailom na ' + email + ' alebo poštou na adresu prevádzkovateľa, a môže použiť vzorový formulár dostupný na webe v sekcii Dokumenty.',
-          'Kupujúci zakúpením a aktiváciou členstva alebo vstupu výslovne žiada, aby sa poskytovanie služby začalo pred uplynutím lehoty na odstúpenie, a berie na vedomie, že po úplnom poskytnutí služby (napr. využitý jednorazový vstup) právo na odstúpenie stráca. Ak odstúpi od zmluvy v priebehu poskytovania služby, uhradí prevádzkovateľovi cenu zodpovedajúcu rozsahu služby poskytnutej do dňa doručenia odstúpenia (pri členstve pomernú časť za dni odo dňa aktivácie, pri permanentke cenu využitých vstupov podľa ceny jednorazového vstupu).',
-          'Prevádzkovateľ vráti platbu, resp. jej zostávajúcu časť, do 14 dní od doručenia odstúpenia rovnakým spôsobom, akým bola vykonaná, ak sa s kupujúcim nedohodne inak.',
-        ],
-      },
-      {
-        h: '8. Povinnosti návštevníka',
+        h: '3. Členstvo, ceny a platnosť',
+        p: ['Základný cenník KM GYM:'],
         ul: [
-          'Dodržiavať Prevádzkový poriadok fitnescentra (zverejnený na webe a v priestoroch fitnescentra) a pokyny prevádzkovateľa.',
-          'Cvičiť na vlastnú zodpovednosť, s ohľadom na svoj zdravotný stav a schopnosti, a používať zariadenie len spôsobom, na ktorý je určené.',
-          'Neposkytovať PIN kód iným osobám a nevpúšťať do priestorov osoby bez vlastnej rezervácie.',
-          'Nahradiť škodu, ktorú na zariadení alebo priestoroch spôsobí úmyselne alebo z nedbanlivosti.',
+          'Bežné mesačné členstvo: 39 €.',
+          'Zvýhodnené mesačné členstvo pre študentov do 19 rokov: 32 €.',
+          'Zvýhodnené mesačné členstvo pre seniorov: 32 €.',
+          'Jednorazový vstup: 5 €.',
+          'Jednorazový vstup pre študenta: 3 €.',
+          'Balík 10 vstupov: 45 €.',
+          'Trojmesačné členstvo: 109 €.',
+          'Ročné členstvo: 429 €.',
         ],
       },
       {
-        h: '9. Zodpovednosť prevádzkovateľa',
+        h: '',
         p: [
-          'Prevádzkovateľ zodpovedá za technický stav zariadenia a priestorov. Nezodpovedá za ujmu na zdraví spôsobenú nesprávnym používaním zariadenia, precenením vlastných síl alebo porušením prevádzkového poriadku, ani za veci odložené mimo uzamykateľných skriniek. Fitnescentrum je poistené pre prípad zodpovednosti za škodu spôsobenú prevádzkou.',
+          'Rozhodujúca je cena a rozsah produktu zobrazené zákazníkovi pred potvrdením konkrétneho nákupu. Zvýhodnenú cenu môže prevádzkovateľ podmieniť preukázaním nároku. Ak sa cena alebo ponuka zmení, zmena sa nevzťahuje spätne na už zaplatenú službu.',
+          'Ak pri konkrétnom produkte nie je pred nákupom výslovne uvedené inak, mesačné členstvo platí 30 po sebe nasledujúcich dní od aktivácie. Pri iných produktoch platí doba uvedená pri nákupe. Členstvo je osobné a neprenosné a automaticky sa neobnovuje, ak sa zákazník výslovne nedohodne inak.',
+          'Nevyužitie členstva z osobných dôvodov samo osebe nezakladá nárok na predĺženie alebo vrátenie ceny. Toto ustanovenie neobmedzuje zákonné práva zákazníka, najmä ak služba nebola poskytnutá alebo bola podstatne obmedzená.',
         ],
       },
       {
-        h: '10. Porušenie podmienok',
+        h: '4. Prístup do prevádzky',
         p: [
-          'Pri závažnom alebo opakovanom porušení týchto podmienok alebo prevádzkového poriadku (najmä vpustenie cudzej osoby, poškodzovanie zariadenia, ohrozovanie ostatných) je prevádzkovateľ oprávnený členstvo zrušiť bez nároku na vrátenie ceny za nevyužité obdobie a odmietnuť ďalší vstup.',
+          'KM GYM je samoobslužné fitness centrum. Prístup je možný v rozsahu a čase uvedenom pri zakúpenej službe a podľa aktuálneho prístupového systému. Ak je zákazníkovi pri konkrétnom členstve potvrdený režim 24/7, môže vstupovať nepretržite s výnimkou oznámených obmedzení alebo mimoriadnych situácií.',
+          'PIN, QR kód alebo iný prístupový údaj je osobný a neprenosný. Zákazník ho nesmie poskytnúť inej osobe, zverejniť ani umožniť vstup neoprávnenej osobe. Zakázané je blokovať dvere, obchádzať vstupný systém alebo manipulovať so zámkami a zabezpečovacími prvkami.',
+          'Pri poruche vstupného systému alebo nebezpečnej situácii zákazník nesmie obchádzať zabezpečenie a bezodkladne kontaktuje prevádzkovateľa na uvedenom e‑maile alebo telefónnom čísle. Pri bezprostrednom ohrození života alebo zdravia volá 112 alebo 155.',
+          'Prevádzkovateľ môže z dôvodu údržby, poruchy, výpadku energií, ohrozenia bezpečnosti, zásahu orgánov verejnej moci alebo inej závažnej okolnosti dočasne obmedziť vstup. Ak je to možné, zákazníkov informuje vopred alebo bez zbytočného odkladu. Nároky zákazníka pri obmedzení služby sa posudzujú podľa rozsahu, trvania a platných právnych predpisov.',
         ],
       },
       {
-        h: '11. Reklamácie a riešenie sporov',
+        h: '5. Pravidlá bezpečného používania',
+        ul: [
+          'Zákazník používa stroje a pomôcky len na určený účel a primerane svojim schopnostiam a zdravotnému stavu.',
+          'Zákazník nesmie používať poškodené zariadenie ani svojvoľne meniť jeho konštrukciu alebo bezpečnostné nastavenia. Poruchu oznámi prevádzkovateľovi.',
+          'Závažia, kotúče, adaptéry a pomôcky sa po použití vracajú na určené miesto. Po použití zákazník zanechá zariadenie čisté a pripravené pre ďalšieho návštevníka.',
+          'Zákazník nesmie cvičiť pod vplyvom alkoholu, omamných alebo psychotropných látok ani v stave, ktorý zjavne znižuje schopnosť bezpečne trénovať.',
+          'Pri bolesti na hrudníku, náhlej dýchavičnosti, závrate, strate koordinácie alebo inom vážnom príznaku zákazník tréning preruší a podľa potreby privolá pomoc.',
+          'V priestoroch sa vyžaduje čisté športové oblečenie a vhodná športová obuv. Zákazník dodržiava hygienické pokyny a pravidlá používania šatní a sociálnych zariadení.',
+          'Je zakázané fajčiť, poškodzovať vybavenie, obťažovať ostatných, vyvolávať konflikty alebo vykonávať činnosť ohrozujúcu bezpečnosť či neprimerane obmedzujúcu ostatných členov.',
+          'Zákazník nesmie fotografovať ani nahrávať iné osoby spôsobom zasahujúcim do ich súkromia alebo práv bez príslušného právneho dôvodu.',
+        ],
+        p: ['KM GYM neposkytuje zdravotnú diagnostiku ani zdravotnú starostlivosť. Zákazník s pochybnosťami o vhodnosti cvičenia alebo so zdravotným obmedzením sa má poradiť so zdravotníckym odborníkom. Tieto podmienky nevylučujú zákonné povinnosti prevádzkovateľa ani jeho zodpovednosť v rozsahu, v akom ju nemožno podľa zákona vylúčiť.'],
+      },
+      {
+        h: '6. Maloleté osoby',
         p: [
-          'Reklamácie sa riadia Reklamačným poriadkom zverejneným na webe. Spotrebiteľ má právo obrátiť sa na prevádzkovateľa so žiadosťou o nápravu, ak nie je spokojný s vybavením reklamácie alebo sa domnieva, že boli porušené jeho práva. Ak prevádzkovateľ žiadosť zamietne alebo na ňu neodpovie do 30 dní, spotrebiteľ môže podať návrh na začatie alternatívneho riešenia sporu podľa zákona č. 391/2015 Z. z. subjektu alternatívneho riešenia sporov, ktorým je Slovenská obchodná inšpekcia (www.soi.sk) alebo iná oprávnená právnická osoba zapísaná v zozname Ministerstva hospodárstva SR.',
+          'Osoby mladšie ako 15 rokov môžu využívať fitness priestory len v sprievode zodpovednej dospelej osoby. Osoby vo veku 15 až 17 rokov môžu vstupovať samostatne len po predložení písomného súhlasu zákonného zástupcu a schválení prevádzkovateľom.',
+          'Maloletým nie je povolený samostatný vstup v čase od 22:00 do 06:00. Prevádzkovateľ môže overiť vek a súhlas zákonného zástupcu. Maloletí nesmú obchádzať obmedzenia vstupnej aplikácie alebo používať prístupové údaje iných osôb.',
         ],
       },
       {
-        h: '12. Záverečné ustanovenia',
+        h: '7. Škoda, úraz a porušenie podmienok',
         p: [
-          'Vzťahy neupravené týmito podmienkami sa riadia právnym poriadkom Slovenskej republiky, najmä Občianskym zákonníkom, zákonom č. 108/2024 Z. z. o ochrane spotrebiteľa a zákonom č. 391/2015 Z. z. o alternatívnom riešení spotrebiteľských sporov.',
-          'Prevádzkovateľ môže tieto podmienky meniť; pre kupujúceho platí znenie účinné v deň uzavretia zmluvy. Aktuálne znenie je vždy dostupné na webe kmgym.sk.',
+          'Zákazník zodpovedá za škodu, ktorú spôsobí porušením svojich zákonných alebo zmluvných povinností, podľa platných právnych predpisov. Úraz, poškodenie vybavenia alebo nebezpečnú situáciu oznámi bezodkladne prevádzkovateľovi.',
+          'Pri dôvodnom podozrení na zdieľanie prístupového kódu, ohrozovanie bezpečnosti, poškodzovanie majetku alebo závažné porušenie týchto podmienok môže prevádzkovateľ primerane a dočasne pozastaviť prístup. Ak je to možné, zákazník bude informovaný o dôvode a ďalšom postupe. Pri závažnom alebo opakovanom porušení môže prevádzkovateľ členstvo ukončiť v súlade s právnymi predpismi.',
+          'Tieto podmienky nezavádzajú zmluvnú pokutu za porušenie pravidiel. Prevádzkovateľ si môže uplatniť náhradu škody, ak na ňu vznikne nárok podľa zákona.',
+        ],
+      },
+      {
+        h: '8. Odstúpenie od zmluvy pri nákupe na diaľku',
+        p: [
+          `Ak zákazník – spotrebiteľ uzavrie zmluvu na diaľku, má spravidla právo odstúpiť od zmluvy bez uvedenia dôvodu do 14 dní odo dňa jej uzavretia, pokiaľ sa na konkrétnu službu nevzťahuje zákonná výnimka. Odstúpenie možno zaslať jednoznačným vyhlásením na ${email} alebo poštou na adresu ${o.name}, ${o.street}, ${o.zip} ${o.city}. Vzorový formulár je dostupný v sekcii Dokumenty.`,
+          'Ak spotrebiteľ výslovne požiada o začatie poskytovania služby pred uplynutím lehoty na odstúpenie, môže byť pri odstúpení povinný zaplatiť pomernú cenu za plnenie poskytnuté do oznámenia odstúpenia, ak sú splnené zákonné podmienky. Ak je služba úplne poskytnutá na základe predchádzajúceho výslovného súhlasu spotrebiteľa a jeho potvrdenia, že berie na vedomie stratu práva na odstúpenie po úplnom poskytnutí, právo na odstúpenie môže zaniknúť v súlade so zákonom.',
+          'Všeobecné potvrdenie týchto podmienok nenahrádza osobitnú výslovnú žiadosť alebo súhlas, ak ich právne predpisy vyžadujú. Pri online nákupe musia byť takéto voľby zobrazené samostatne a ich potvrdenie preukázateľne zaznamenané.',
+        ],
+      },
+      {
+        h: '9. Reklamácie a podnety',
+        p: [
+          `Reklamácie, sťažnosti a žiadosti o nápravu možno zaslať na e‑mail ${email} alebo poštou na adresu ${o.name}, ${o.street}, ${o.zip} ${o.city}. Zákazník uvedie kontaktné údaje, opis problému, dátum a doklad o nákupe, ak je k dispozícii. Prevádzkovateľ podanie vybaví v zákonnej lehote. Podrobnosti upravuje Reklamačný poriadok.`,
+          'Spotrebiteľ môže využiť mechanizmy alternatívneho riešenia spotrebiteľských sporov podľa platných právnych predpisov Slovenskej republiky (zákon č. 391/2015 Z. z.; subjektom je napr. Slovenská obchodná inšpekcia, www.soi.sk).',
+        ],
+      },
+      {
+        h: '10. Ochrana osobných údajov',
+        p: ['Osobné údaje sa spracúvajú na účely vybavenia objednávky, správy členstva, zabezpečenia vstupu, plnenia zákonných povinností a riešenia podnetov. Podrobné informácie o účeloch, právnych základoch, dobe uchovávania, príjemcoch a právach dotknutých osôb sú uvedené v samostatnom dokumente Ochrana osobných údajov, ktorý je zákazníkovi dostupný pred registráciou alebo poskytnutím údajov. Tieto podmienky nenahrádzajú informačnú povinnosť podľa GDPR.'],
+      },
+      {
+        h: '11. Záverečné ustanovenia',
+        p: [
+          'Tieto podmienky sa riadia právnym poriadkom Slovenskej republiky pri zachovaní kogentných práv spotrebiteľa. Ak sa niektoré ustanovenie stane neplatným alebo nevymáhateľným, ostatné ustanovenia zostávajú zachované.',
+          'Prevádzkovateľ môže podmienky meniť do budúcnosti. Aktuálna verzia bude zverejnená na webovej stránke KM GYM. Zmeny nesmú spätne odňať nadobudnuté práva zákazníka ani meniť už zaplatené obdobie v jeho neprospech.',
+          'Dátum vyhotovenia: 26. október 2026.',
         ],
       },
     ],
@@ -243,7 +264,7 @@ export const sk: LegalContent = {
         ul: [
           'Fitnescentrum je otvorené nonstop, bez obsluhy. Vstup je možný len s platnou rezerváciou a osobným PIN kódom, ktorý platí počas rezervovaného času.',
           'PIN kód je neprenosný. Je zakázané vpúšťať do priestorov iné osoby alebo im kód poskytnúť. Každý návštevník musí mať vlastnú rezerváciu.',
-          `Samostatný vstup je povolený od ${L.minAgeAlone} rokov. Mladšie osoby môžu cvičiť len v sprievode dospelej osoby s vlastnou rezerváciou.`,
+          `Osoby mladšie ako ${L.minAgeAlone} rokov cvičia len v sprievode zodpovednej dospelej osoby. Osoby vo veku 15 – 17 rokov môžu vstupovať samostatne len s písomným súhlasom zákonného zástupcu schváleným prevádzkovateľom; samostatný vstup maloletých nie je povolený v čase ${L.minorsCurfew}.`,
           'Pri odchode skontroluj, či sa vstupné dvere zatvorili a zamkli.',
           'Priestory sú monitorované kamerovým systémom so záznamom (okrem šatní a spŕch) na účely bezpečnosti a ochrany majetku – podrobnosti v dokumente Ochrana osobných údajov.',
         ],

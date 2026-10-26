@@ -55,8 +55,8 @@ export default async function LegalPage({ params }: Props) {
             <Reveal className="lg:col-span-8">
               <article className="legal-doc max-w-3xl">
                 {doc.sections.map((s, i) => (
-                  <section key={i} className="mb-10">
-                    <h2 className="font-display text-[1.7rem] leading-none text-white md:text-[2rem]">{s.h}</h2>
+                  <section key={i} className={s.h ? 'mb-10' : '-mt-6 mb-10'}>
+                    {s.h && <h2 className="font-display text-[1.7rem] leading-none text-white md:text-[2rem]">{s.h}</h2>}
                     {s.p?.map((p, j) => (
                       <p key={j} className="mt-4 leading-relaxed text-mist">
                         <Text text={p} label={t.common.placeholderBadge} />

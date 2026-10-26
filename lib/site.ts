@@ -13,7 +13,8 @@ export const site = {
   contact: {
     phone: '0903 246 453',
     phoneHref: 'tel:+421903246453',
-    email: '', // DOPLNIŤ – e-mail (prázdne = nezobrazuje sa)
+    email: 'vierka.stellarova@gmail.com',
+    person: 'Viera Kovaničová', // kontaktná osoba (uvedená v obchodných podmienkach)
     address: {
       street: 'Kuchyňa 214',
       city: 'Kuchyňa',
@@ -52,9 +53,11 @@ export const site = {
       { key: 'quarterly', price: 109, featured: false },
       { key: 'yearly', price: 429, featured: false },
       { key: 'student', price: 32, featured: false },
+      { key: 'senior', price: 32, featured: false },
     ],
     passes: [
       { key: 'single', price: 5 },
+      { key: 'studentSingle', price: 3 },
       { key: 'ten', price: 45 },
     ],
   },
@@ -82,8 +85,8 @@ export const site = {
     effectiveDate: '2026-11-01', // dátum účinnosti dokumentov (zmeň pri každej úprave)
     cameras: true, // kamerový systém so záznamom – uvedené v Ochrane osobných údajov a v Prevádzkovom poriadku
     cameraRetentionDays: 15, // doba uchovania záznamu
-    minAgeAlone: 15, // samostatný vstup od tohto veku; mladší len v sprievode / so súhlasom zákonného zástupcu
-    minAgeMembership: 16, // samostatné uzavretie zmluvy (nákup členstva) od tohto veku – DOPLNIŤ podľa rozhodnutia
+    minAgeAlone: 15, // do 15 r. len v sprievode dospelého; 15–17 samostatne len s písomným súhlasom zákonného zástupcu (čl. 6 VOP)
+    minorsCurfew: '22:00 – 06:00', // maloletí bez samostatného vstupu v tomto čase
   },
 
   /** Analytika – prázdne = nič sa nenačíta a cookie lišta sa nezobrazí. Po doplnení sa skripty načítajú až po súhlase. */
