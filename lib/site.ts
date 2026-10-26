@@ -78,8 +78,8 @@ export const site = {
    * Po nasadení: 'https://dennik.kmgym.sk'
    */
   tracker: {
-    url: '', // DOPLNIŤ po nasadení
-    repo: 'https://github.com/DuarteSantos8/openGym', // pôvodný projekt (AGPL v3) – DOPLNIŤ link na náš verejný fork
+    url: 'https://dennik.kmgym.sk',
+    repo: 'https://github.com/tommyx888/km-gym-dennik', // náš verejný fork (AGPL v3); upstream DuarteSantos8/openGym
   },
 
   /** Homepage: cesta k 360° videu interiéru (public/...). Prázdne = statické pozadie. */
