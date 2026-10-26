@@ -507,3 +507,20 @@ html[data-theme="light"] .theme-invert {
 html[data-theme="light"] .animate-breathe {
   opacity: 0.16 !important;
 }
+
+/* Tlač právnych dokumentov */
+@media print {
+  header, footer, .print-hide, [data-sticky-cta] { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .animate-rise, .animate-clip { animation: none !important; opacity: 1 !important; clip-path: none !important; }
+  section { padding: 6mm 0 !important; background: #fff !important; border: 0 !important; }
+  section .animate-breathe, section.grain::before, section.grain::after, .grain::before, .grain::after { display: none !important; }
+  section, section * { background-image: none !important; }
+  section h1 { font-size: 26pt !important; }
+  section h1 { color: #000 !important; font-size: 28pt !important; animation: none !important; }
+  section .eyebrow, section p { color: #222 !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .legal-doc h2 { color: #000 !important; }
+  .legal-doc p, .legal-doc li, .legal-doc dd { color: #222 !important; }
+  .legal-doc dt { color: #000 !important; }
+}

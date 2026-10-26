@@ -56,6 +56,8 @@ export const legalDocs = {
   privacy: { sk: 'ochrana-osobnych-udajov', en: 'privacy' },
   cookies: { sk: 'cookies', en: 'cookies' },
   complaints: { sk: 'reklamacny-poriadok', en: 'complaints' },
+  operating: { sk: 'prevadzkovy-poriadok', en: 'gym-rules' },
+  withdrawal: { sk: 'odstupenie-od-zmluvy', en: 'withdrawal-form' },
 } as const;
 export type LegalKey = keyof typeof legalDocs;
 

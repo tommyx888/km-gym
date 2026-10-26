@@ -5,6 +5,8 @@ import '../globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyCta from '@/components/StickyCta';
+import ConsentBanner from '@/components/ConsentBanner';
+import { legalDocs, localizedHref } from '@/lib/i18n/config';
 import { isLocale, locales, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
@@ -98,6 +100,7 @@ export default async function LocaleLayout({
         </main>
         <Footer locale={locale} />
         <StickyCta text={t.nav.cta} />
+        <ConsentBanner t={t.consent} gaId={site.analytics.gaId} metaPixelId={site.analytics.metaPixelId} moreHref={localizedHref(locale, 'legal', legalDocs.cookies[locale])} />
       </body>
     </html>
   );

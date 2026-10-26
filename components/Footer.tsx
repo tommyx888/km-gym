@@ -3,6 +3,7 @@ import { LogoFull } from './Logo';
 import { legalDocs, localizedHref, type LegalKey, type Locale, type RouteKey } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
+import { ConsentSettingsLink } from './ConsentBanner';
 
 type NavKey = Exclude<RouteKey, 'legal' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
 const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'membership', 'members', 'contact'];
@@ -123,6 +124,9 @@ export default function Footer({ locale }: { locale: Locale }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <ConsentSettingsLink label={t.consent.settings} enabled={Boolean(site.analytics.gaId || site.analytics.metaPixelId)} />
+              </li>
             </ul>
           </div>
         </div>

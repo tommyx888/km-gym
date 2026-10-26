@@ -77,6 +77,21 @@ export const site = {
    * Tréningový denník pre členov (openGym, self-hosted). Prázdne url = stránka ukáže „pripravujeme“.
    * Po nasadení: 'https://dennik.kmgym.sk'
    */
+  /** Právne dokumenty a súhlasy. */
+  legal: {
+    effectiveDate: '2026-11-01', // dátum účinnosti dokumentov (zmeň pri každej úprave)
+    cameras: true, // kamerový systém so záznamom – uvedené v Ochrane osobných údajov a v Prevádzkovom poriadku
+    cameraRetentionDays: 15, // doba uchovania záznamu
+    minAgeAlone: 15, // samostatný vstup od tohto veku; mladší len v sprievode / so súhlasom zákonného zástupcu
+    minAgeMembership: 16, // samostatné uzavretie zmluvy (nákup členstva) od tohto veku – DOPLNIŤ podľa rozhodnutia
+  },
+
+  /** Analytika – prázdne = nič sa nenačíta a cookie lišta sa nezobrazí. Po doplnení sa skripty načítajú až po súhlase. */
+  analytics: {
+    gaId: '', // napr. 'G-XXXXXXXXXX'
+    metaPixelId: '', // napr. '1234567890'
+  },
+
   tracker: {
     url: 'https://dennik.kmgym.sk',
     repo: 'https://github.com/tommyx888/km-gym-dennik', // náš verejný fork (AGPL v3); upstream DuarteSantos8/openGym

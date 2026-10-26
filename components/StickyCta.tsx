@@ -14,6 +14,7 @@ export default function StickyCta({ text }: { text: string }) {
   }, []);
   return (
     <div
+      data-sticky-cta
       className={`fixed inset-x-0 bottom-0 z-40 border-t hairline bg-ink-950/90 p-3 backdrop-blur-md transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] lg:hidden ${
         show ? 'translate-y-0' : 'translate-y-full'
       }`}
