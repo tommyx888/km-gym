@@ -55,6 +55,11 @@ export default async function AdminPage({ params }: Props) {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-5 md:px-8">
           <Reveal>
+            <div className="mb-8 flex flex-wrap gap-3">
+              <Link href={`${localizedHref(locale, 'admin')}/treningy`} className="btn btn-primary">
+                {t.admin.trainings.link} →
+              </Link>
+            </div>
             <div className="grid grid-cols-2 gap-px bg-ink-700 lg:grid-cols-4">
               {(['total', 'active', 'tracker', 'admins'] as const).map((k) => (
                 <div key={k} className="bg-ink-900 p-6">

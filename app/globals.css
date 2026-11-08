@@ -524,3 +524,14 @@ html[data-theme="light"] .animate-breathe {
   .legal-doc p, .legal-doc li, .legal-doc dd { color: #222 !important; }
   .legal-doc dt { color: #000 !important; }
 }
+
+/* Plagát tréningu (A4) */
+.poster-page { min-height: 100vh; }
+.poster-page .poster { color: #131518; }
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  body:has(.poster-page) { background: #fff !important; }
+  body:has(.poster-page) header, body:has(.poster-page) footer, body:has(.poster-page) [data-sticky-cta] { display: none !important; }
+  .poster-page { padding: 0 !important; }
+  .poster { width: 210mm !important; height: 297mm !important; margin: 0 !important; page-break-after: avoid; }
+}

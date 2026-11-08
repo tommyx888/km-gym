@@ -26,7 +26,9 @@ export default function AuthForm({ mode, locale, t }: Props) {
   );
 
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
-  const callback = `${origin}/auth/callback?locale=${locale}`;
+  const nextParam = params.get('next');
+  const nextQs = nextParam && nextParam.startsWith('/') ? `&next=${encodeURIComponent(nextParam)}` : '';
+  const callback = `${origin}/auth/callback?locale=${locale}` + nextQs;
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -138,11 +140,11 @@ export default function AuthForm({ mode, locale, t }: Props) {
         {mode === 'login' && (
           <>
             <Link href={localizedHref(locale, 'forgot')} className="nav-link !text-[0.7rem]">{t.links.forgot}</Link>
-            <Link href={localizedHref(locale, 'register')} className="nav-link !text-[0.7rem]">{t.links.register}</Link>
+            <Link href={`${localizedHref(locale, 'register')}${nextParam ? `?next=${encodeURIComponent(nextParam)}` : ''}`} className="nav-link !text-[0.7rem]">{t.links.register}</Link>
           </>
         )}
         {mode !== 'login' && (
-          <Link href={localizedHref(locale, 'login')} className="nav-link !text-[0.7rem]">{t.links.login}</Link>
+          <Link href={`${localizedHref(locale, 'login')}${nextParam ? `?next=${encodeURIComponent(nextParam)}` : ''}`} className="nav-link !text-[0.7rem]">{t.links.login}</Link>
         )}
       </div>
     </form>

@@ -38,3 +38,6 @@ ALTER TABLE public.km_gym_profiles ADD COLUMN IF NOT EXISTS email TEXT;  -- kóp
 -- km_gym_sync_user_email() + trigger km_gym_on_auth_user_email AFTER UPDATE OF email ON auth.users → profil
 -- policy km_gym_profiles_update_own: člen nemôže meniť ani stĺpec email
 -- UPDATE km_gym_profiles SET is_admin = true WHERE lower(email) = 't.ficek@gmail.com';
+
+-- 8. 11. 2026 – tréningy a akcie (migrácie km_gym_trainings, km_gym_training_functions): km_gym_trainings, km_gym_training_signups,
+-- view km_gym_training_counts, funkcie km_gym_training_signup/cancel/attendance, storage bucket km-gym-trainings. Pozri docs/treningy.md.

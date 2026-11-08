@@ -5,6 +5,7 @@ import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import ReservineButton from '@/components/ReservineButton';
 import ProfileForm from '@/components/auth/ProfileForm';
+import MyTrainings, { type MySignup } from '@/components/trainings/MyTrainings';
 import { createClient } from '@/lib/supabase/server';
 import { isLocale, localizedHref, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
@@ -30,11 +31,14 @@ export default async function MembersPage({ params, searchParams }: Props) {
   } = await supabase.auth.getUser();
   if (!user) redirect(localizedHref(locale, 'login'));
 
-  const [{ data: profile }, { data: announcements }, { data: plans }] = await Promise.all([
+  const [{ data: profile }, { data: announcements }, { data: plans }, { data: mySignups }] = await Promise.all([
     supabase.from('km_gym_profiles').select('*').eq('id', user.id).maybeSingle(),
     supabase.from('km_gym_announcements').select('*').order('pinned', { ascending: false }).order('published_at', { ascending: false }).limit(10),
     supabase.from('km_gym_plans').select('*').order('sort_order').order('created_at', { ascending: false }),
+    supabase.from('km_gym_training_signups').select('status, training:km_gym_trainings(slug, title, title_en, starts_at, status)').eq('user_id', user.id).order('created_at', { ascending: false }).limit(40),
   ]);
+  const nowMs = new Date().getTime();
+  const myTrainings = ((mySignups ?? []) as unknown as MySignup[]).filter((r) => r.training).sort((x, y) => new Date(y.training.starts_at).getTime() - new Date(x.training.starts_at).getTime());
 
   const name = profile?.full_name || user.email?.split('@')[0] || '';
   const status = (profile?.membership_status ?? 'none') as 'none' | 'active' | 'expired';
@@ -106,6 +110,9 @@ export default async function MembersPage({ params, searchParams }: Props) {
 
             {/* Pravý stĺpec: oznamy + plány */}
             <div className="space-y-6 lg:col-span-7">
+              <Reveal delay={40}>
+                <MyTrainings locale={locale} t={t.trainings} rows={myTrainings} now={nowMs} />
+              </Reveal>
               <Reveal delay={80}>
                 <div className="border hairline p-7 md:p-8">
                   <p className="eyebrow">{t.members.announcements}</p>

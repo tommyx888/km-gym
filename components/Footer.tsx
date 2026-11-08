@@ -6,7 +6,7 @@ import { site } from '@/lib/site';
 import { ConsentSettingsLink } from './ConsentBanner';
 
 type NavKey = Exclude<RouteKey, 'legal' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
-const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'membership', 'members', 'contact'];
+const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'trainings', 'howItWorks', 'tracker', 'membership', 'members', 'contact'];
 
 export default function Footer({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);

@@ -3,6 +3,7 @@ import Reveal from '@/components/Reveal';
 import Marquee from '@/components/Marquee';
 import ReservineButton from '@/components/ReservineButton';
 import PlaceholderNote, { clean } from '@/components/PlaceholderNote';
+import UpcomingTrainings from '@/components/trainings/UpcomingTrainings';
 import { isLocale, localizedHref, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
@@ -155,6 +156,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
       </section>
+
+      {/* -------------------------------------------------------- TRAININGS */}
+      <UpcomingTrainings locale={locale} t={t.trainings} />
 
       {/* -------------------------------------------------------- FOR WHOM */}
       <section className="relative overflow-hidden border-y hairline bg-ink-950 py-28 grain md:py-40">

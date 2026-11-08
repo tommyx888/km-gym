@@ -12,7 +12,7 @@ import { localizedHref, routes, type Locale, type RouteKey } from '@/lib/i18n/co
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
 type NavKey = Exclude<RouteKey, 'legal' | 'members' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
-const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'howItWorks', 'tracker', 'contact'];
+const NAV: NavKey[] = ['home', 'about', 'equipment', 'pricing', 'trainings', 'howItWorks', 'tracker', 'contact'];
 
 export default function Header({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);

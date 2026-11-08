@@ -19,6 +19,7 @@ export const routes = {
   membership: { sk: 'clenstvo', en: 'membership' },
   contact: { sk: 'kontakt', en: 'contact' },
   tracker: { sk: 'dennik', en: 'tracker' },
+  trainings: { sk: 'treningy', en: 'trainings' },
   members: { sk: 'clenska-zona', en: 'members' },
   admin: { sk: 'admin', en: 'admin' },
   login: { sk: 'prihlasenie', en: 'login' },
