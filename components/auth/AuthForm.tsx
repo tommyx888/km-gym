@@ -34,7 +34,8 @@ export default function AuthForm({ mode, locale, t }: Props) {
     e.preventDefault();
     setBusy(true);
     setMsg(null);
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const email = String(fd.get('email') ?? '').trim().toLowerCase();
     const password = String(fd.get('password') ?? '');
 
@@ -56,7 +57,7 @@ export default function AuthForm({ mode, locale, t }: Props) {
         // Supabase pri existujúcom e-maile vráti user bez identities (ochrana pred enumeráciou)
         if (data.user && data.user.identities?.length === 0) throw new Error(t.errors.emailExists);
         setMsg({ kind: 'ok', text: t.registerSuccess });
-        e.currentTarget.reset();
+        form.reset();
       } else if (mode === 'login') {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
