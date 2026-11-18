@@ -150,6 +150,8 @@ export default async function TrainingPage({ params }: Props) {
                   locale={locale}
                   t={d}
                   trainingId={training.id}
+                  title={title}
+                  when={`${fmtDate(training.starts_at, locale, { weekday: 'short' })} · ${fmtTime(training.starts_at, locale)}`}
                   signedIn={Boolean(user)}
                   loginHref={`${localizedHref(locale, 'login')}?next=${encodeURIComponent(localizedHref(locale, 'trainings', training.slug))}`}
                   myStatus={myStatus}

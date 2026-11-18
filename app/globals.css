@@ -535,3 +535,66 @@ html[data-theme="light"] .animate-breathe {
   .poster-page { padding: 0 !important; }
   .poster { width: 210mm !important; height: 297mm !important; margin: 0 !important; page-break-after: avoid; }
 }
+
+/* ------------------------------------------------------------------
+   Lístok (tréningy) – perforácia, zárezy, odtrhnutie útržku.
+   Čisté CSS, bez závislostí; rešpektuje prefers-reduced-motion.
+   ------------------------------------------------------------------ */
+.ticket {
+  position: relative;
+}
+/* perforovaný rez s polkruhovými zárezmi po bokoch */
+.ticket-perf {
+  position: relative;
+  height: 0;
+  border-top: 2px dashed var(--km-anthracite-600);
+}
+.ticket-perf::before,
+.ticket-perf::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--background);
+  box-shadow: inset 0 0 0 1px var(--km-anthracite-700);
+}
+.ticket-perf::before { left: -11px; clip-path: inset(0 0 0 50%); }
+.ticket-perf::after { right: -11px; clip-path: inset(0 50% 0 0); }
+
+/* útržok: zubatá horná hrana (ako po odtrhnutí) */
+.ticket-stub {
+  position: relative;
+  clip-path: polygon(
+    0 10px, 3% 2px, 6% 9px, 9% 1px, 12% 8px, 15% 3px, 18% 10px, 21% 2px, 24% 7px, 27% 1px, 30% 9px, 33% 3px, 36% 8px, 39% 1px,
+    42% 10px, 45% 2px, 48% 7px, 51% 1px, 54% 9px, 57% 3px, 60% 8px, 63% 1px, 66% 10px, 69% 2px, 72% 7px, 75% 1px, 78% 9px, 81% 3px,
+    84% 8px, 87% 1px, 90% 10px, 93% 2px, 96% 7px, 100% 1px, 100% 100%, 0 100%
+  );
+  transform-origin: 8% 0;
+}
+.ticket-stub--torn {
+  transform: translateY(14px) rotate(-2.5deg);
+}
+.ticket-stub--tearing {
+  animation: ticket-tear 1.15s var(--ease-out-expo) both;
+}
+@keyframes ticket-tear {
+  0%   { transform: translateY(-8px) rotate(0deg); }
+  18%  { transform: translateY(-6px) rotate(0.6deg); }
+  26%  { transform: translateY(-6px) rotate(-0.8deg); }
+  34%  { transform: translateY(-5px) rotate(0.7deg); }
+  42%  { transform: translateY(-5px) rotate(-0.6deg); }
+  55%  { transform: translateY(-4px) rotate(0.3deg); }
+  70%  { transform: translateY(22px) rotate(-4deg); }
+  85%  { transform: translateY(10px) rotate(-2deg); }
+  100% { transform: translateY(14px) rotate(-2.5deg); }
+}
+/* text útržku sa vynorí až keď sa útržok „odlepí“ */
+.ticket-stub--tearing > * { animation: ticket-fade 0.6s ease-out 0.55s both; }
+@keyframes ticket-fade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket-stub--tearing { animation: none; transform: translateY(14px) rotate(-2.5deg); }
+  .ticket-stub--tearing > * { animation: none; }
+}
