@@ -598,3 +598,24 @@ html[data-theme="light"] .animate-breathe {
   .ticket-stub--tearing { animation: none; transform: translateY(14px) rotate(-2.5deg); }
   .ticket-stub--tearing > * { animation: none; }
 }
+
+/* útržok odtrhnutý ťahom: dopadne z miesta, kam ho používateľ potiahol */
+.ticket-stub--dropping {
+  animation: ticket-drop 0.7s var(--ease-out-expo) both;
+}
+@keyframes ticket-drop {
+  0%   { transform: translateY(var(--tear-y, 70px)) rotate(3deg); }
+  55%  { transform: translateY(26px) rotate(-4deg); }
+  100% { transform: translateY(14px) rotate(-2.5deg); }
+}
+.ticket-stub--dropping > * { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ticket-stub--dropping { animation: none; transform: translateY(14px) rotate(-2.5deg); }
+}
+.ticket-grab {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.ticket-grab:active { cursor: grabbing; }
