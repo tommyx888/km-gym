@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import TrainingCard from '@/components/trainings/TrainingCard';
+import NewsletterForm from '@/components/NewsletterForm';
 import { createClient } from '@/lib/supabase/server';
 import { isLocale, type Locale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
@@ -48,6 +49,15 @@ export default async function TrainingsPage({ params }: Props) {
               <p className="max-w-xl text-lg text-mist">{t.trainings.none}</p>
             </Reveal>
           )}
+
+          <Reveal delay={120}>
+            <div className="mt-16 border hairline bg-ink-900 p-8 md:p-10">
+              <p className="eyebrow">{t.newsletter.eyebrow}</p>
+              <p className="font-display mt-4 text-[2rem] leading-none text-white">{t.newsletter.footerTitle}</p>
+              <p className="mt-4 max-w-xl text-mist">{t.newsletter.lead}</p>
+              <NewsletterForm locale={locale} t={t.newsletter} source="trainings" />
+            </div>
+          </Reveal>
 
           {past && past.length > 0 && (
             <div className="mt-20">

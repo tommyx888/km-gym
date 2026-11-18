@@ -4,8 +4,9 @@ import { legalDocs, localizedHref, type LegalKey, type Locale, type RouteKey } f
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { site } from '@/lib/site';
 import { ConsentSettingsLink } from './ConsentBanner';
+import NewsletterForm from './NewsletterForm';
 
-type NavKey = Exclude<RouteKey, 'legal' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
+type NavKey = Exclude<RouteKey, 'legal' | 'newsletter' | 'admin' | 'login' | 'register' | 'forgot' | 'newPassword'>;
 const NAV: NavKey[] = ['about', 'equipment', 'pricing', 'trainings', 'howItWorks', 'tracker', 'membership', 'members', 'contact'];
 
 export default function Footer({ locale }: { locale: Locale }) {
@@ -38,6 +39,11 @@ export default function Footer({ locale }: { locale: Locale }) {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-crimson-600" />
               </span>
               {t.hero.open247}
+            </div>
+            <div className="mt-10 max-w-sm">
+              <h3 className="eyebrow">{t.newsletter.footerTitle}</h3>
+              <p className="mt-3 text-sm text-mist">{t.newsletter.footerText}</p>
+              <NewsletterForm locale={locale} t={t.newsletter} source="footer" compact />
             </div>
           </div>
 

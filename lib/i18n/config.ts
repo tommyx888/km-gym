@@ -27,6 +27,7 @@ export const routes = {
   forgot: { sk: 'zabudnute-heslo', en: 'forgot-password' },
   newPassword: { sk: 'nove-heslo', en: 'new-password' },
   legal: { sk: 'dokumenty', en: 'legal' },
+  newsletter: { sk: 'newsletter', en: 'newsletter' },
 } as const;
 
 export type RouteKey = keyof typeof routes;

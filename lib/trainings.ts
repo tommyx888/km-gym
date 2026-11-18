@@ -28,13 +28,16 @@ export type Training = {
   status: TrainingStatus;
   series_id: string | null;
   reminder_sent_at: string | null;
+  newsletter_sent_at: string | null;
+  notify_creator: boolean;
+  created_by: string | null;
   created_at: string;
 };
 
 export type TrainingCounts = { training_id: string; confirmed: number; waitlist: number };
 
 export const TRAINING_COLS =
-  'id, slug, title, title_en, description, description_en, details, details_en, trainer, location, starts_at, duration_min, capacity, image_url, pricing, price_cents, payment_url, payment_note, members_only, cancel_deadline_hours, status, series_id, reminder_sent_at, created_at';
+  'id, slug, title, title_en, description, description_en, details, details_en, trainer, location, starts_at, duration_min, capacity, image_url, pricing, price_cents, payment_url, payment_note, members_only, cancel_deadline_hours, status, series_id, reminder_sent_at, newsletter_sent_at, notify_creator, created_by, created_at';
 
 /** Lokalizované pole (EN s fallbackom na SK). */
 export function tl(t: Training, field: 'title' | 'description' | 'details', locale: Locale): string {
@@ -95,4 +98,17 @@ export function buildIcs(t: Training, locale: Locale, url: string): string {
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
+}
+
+/** Odkazy „Pridať do kalendára“ (Google, Outlook web) – pre e‑maily aj stránku. */
+export function calendarLinks(t: Training, locale: Locale, url: string) {
+  const start = new Date(t.starts_at);
+  const end = endsAt(t);
+  const g = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  const title = `KM GYM – ${tl(t, 'title', locale)}`;
+  const details = `${tl(t, 'description', locale)}\n${url}`;
+  const location = t.location || 'KM GYM, Kuchyňa 214';
+  const google = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${g(start)}/${g(end)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+  const outlook = `https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=${encodeURIComponent(title)}&startdt=${start.toISOString()}&enddt=${end.toISOString()}&body=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+  return { google, outlook };
 }

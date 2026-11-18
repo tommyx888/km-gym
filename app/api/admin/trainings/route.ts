@@ -4,14 +4,16 @@ import { getSupabaseAdmin } from '@/lib/supabase';
 import { isLocale } from '@/lib/i18n/config';
 import { slugify, TRAINING_COLS, type Training } from '@/lib/trainings';
 import { sendTrainingEmail } from '@/lib/training-emails';
+import { sendNewTrainingNewsletter } from '@/lib/newsletter';
 
 /**
  * Admin API tréningov.
- * POST   { data, repeatWeeks? }            → vytvorí tréning (alebo sériu: repeatWeeks × každý týždeň)
- * PATCH  { id, data }                       → úprava
+ * POST   { data, repeatWeeks?, sendNewsletter? } → vytvorí tréning (alebo sériu: repeatWeeks × každý týždeň)
+ * PATCH  { id, data, sendNewsletter? }           → úprava
+ * Pri zverejnení (status published) a sendNewsletter=true sa odberateľom newslettra pošle „Nový tréning“ (raz; newsletter_sent_at).
  * PUT    { id, action: 'cancel'|'duplicate'|'remove_signup'|'attendance', ... } → akcie
  */
-const FIELDS = ['title', 'title_en', 'description', 'description_en', 'details', 'details_en', 'trainer', 'location', 'starts_at', 'duration_min', 'capacity', 'image_url', 'pricing', 'price_cents', 'payment_url', 'payment_note', 'members_only', 'cancel_deadline_hours', 'status'] as const;
+const FIELDS = ['title', 'title_en', 'description', 'description_en', 'details', 'details_en', 'trainer', 'location', 'starts_at', 'duration_min', 'capacity', 'image_url', 'pricing', 'price_cents', 'payment_note', 'members_only', 'cancel_deadline_hours', 'status', 'notify_creator'] as const;
 
 async function requireAdmin() {
   const supabase = await createClient();
@@ -32,7 +34,7 @@ function clean(input: Record<string, unknown>) {
     if (typeof v === 'string') v = v.trim() || null;
     if (k === 'duration_min' || k === 'capacity' || k === 'cancel_deadline_hours') v = v == null ? null : Number(v);
     if (k === 'price_cents') v = v == null || v === '' ? null : Math.round(Number(v));
-    if (k === 'members_only') v = Boolean(v);
+    if (k === 'members_only' || k === 'notify_creator') v = Boolean(v);
     out[k] = v;
   }
   if (out.pricing !== 'paid') {
@@ -68,7 +70,9 @@ export async function POST(request: NextRequest) {
   }
   const { data: created, error } = await ctx.supabase.from('km_gym_trainings').insert(rows).select(TRAINING_COLS);
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-  return NextResponse.json({ trainings: created });
+  const first = (created ?? [])[0] as Training | undefined;
+  const newsletter = first && body?.sendNewsletter && first.status === 'published' ? await sendNewTrainingNewsletter(first) : 0;
+  return NextResponse.json({ trainings: created, newsletter });
 }
 
 export async function PATCH(request: NextRequest) {
@@ -81,7 +85,9 @@ export async function PATCH(request: NextRequest) {
   if (data.title && data.starts_at) data.slug = await uniqueSlug(ctx.supabase, String(data.title), String(data.starts_at), id);
   const { data: updated, error } = await ctx.supabase.from('km_gym_trainings').update({ ...data, updated_at: new Date().toISOString() }).eq('id', id).select(TRAINING_COLS).single();
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-  return NextResponse.json({ training: updated });
+  const u = updated as Training;
+  const newsletter = body?.sendNewsletter && u.status === 'published' && !u.newsletter_sent_at ? await sendNewTrainingNewsletter(u) : 0;
+  return NextResponse.json({ training: updated, newsletter });
 }
 
 export async function PUT(request: NextRequest) {
@@ -121,7 +127,7 @@ export async function PUT(request: NextRequest) {
       .insert({
         title: s.title, title_en: s.title_en, description: s.description, description_en: s.description_en, details: s.details, details_en: s.details_en,
         trainer: s.trainer, location: s.location, starts_at: starts, duration_min: s.duration_min, capacity: s.capacity, image_url: s.image_url,
-        pricing: s.pricing, price_cents: s.price_cents, payment_url: s.payment_url, payment_note: s.payment_note, members_only: s.members_only,
+        pricing: s.pricing, price_cents: s.price_cents, payment_note: s.payment_note, members_only: s.members_only, notify_creator: s.notify_creator,
         cancel_deadline_hours: s.cancel_deadline_hours, status: 'draft', slug: await uniqueSlug(ctx.supabase, s.title, starts), created_by: ctx.user.id,
       })
       .select(TRAINING_COLS)

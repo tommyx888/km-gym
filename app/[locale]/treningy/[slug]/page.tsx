@@ -116,7 +116,7 @@ export default async function TrainingPage({ params }: Props) {
                     [d.where, training.location || 'KM GYM'],
                     [d.trainer, training.trainer || '—'],
                     [d.capacity, d.signedUp.replace('{n}', String(counts.confirmed)).replace('{max}', String(training.capacity))],
-                    [d.price, price],
+                    [d.price, training.payment_note ? `${price} · ${training.payment_note}` : price],
                   ].map(([k, v]) => (
                     <div key={k} className="bg-ink-900 p-5">
                       <dt className="text-[0.62rem] uppercase tracking-[0.25em] text-ink-500">{k}</dt>
@@ -133,20 +133,6 @@ export default async function TrainingPage({ params }: Props) {
                   {training.members_only && <span className="border border-crimson-600/60 px-3 py-1.5 text-crimson-500">{d.membersOnly}</span>}
                 </div>
               </Reveal>
-
-              {training.pricing === 'paid' && (training.payment_url || training.payment_note) && (
-                <Reveal delay={120}>
-                  <div className="mt-8 border hairline p-6">
-                    <p className="eyebrow">{d.payHow}</p>
-                    {training.payment_note && <p className="mt-3 text-mist">{training.payment_note}</p>}
-                    {training.payment_url && (
-                      <a href={training.payment_url} target="_blank" rel="noopener noreferrer" className="btn btn-ghost mt-4 !px-5 !py-3 !text-[0.65rem]">
-                        {d.payLink} ↗
-                      </a>
-                    )}
-                  </div>
-                </Reveal>
-              )}
 
               {details && (
                 <Reveal delay={160}>

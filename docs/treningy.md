@@ -11,7 +11,16 @@
   zobrazuje 3 najbližšie tréningy (sekcia sa skryje, keď žiadne nie sú). EN: `/en/trainings/...`.
 - **Člen**: prihlásenie jedným klikom (bez účtu → login/registrácia a návrat späť), kapacita → čakacia listina, odhlásenie
   do uzávierky, „Moje tréningy“ v členskej zóne (najbližšie + história).
-- **Platba**: zadarmo / v cene členstva / platený (cena + odkaz napr. na Reservine + poznámka). Web platbu nerieši.
+- **Platba**: zadarmo / v cene členstva / platený (cena + poznámka, napr. „platba na mieste“). Web **nikam na platbu nepresmeruje** –
+  prihlásenie je vždy bezplatné, poznámka sa len zobrazí na stránke tréningu a v potvrdzovacom e‑maile.
+- **E‑maily pri prihlásení**: prihlásený dostane potvrdenie s tlačidlami „Pridať do kalendára“ (Google, Outlook) a .ics prílohou
+  (Apple/Outlook). **Zadávateľ tréningu** (kto ho vytvoril, `created_by`) dostane e‑mail o každom prihlásení aj odhlásení s menom,
+  e‑mailom, stavom a počtami – vypne sa checkboxom „Posielať mi e‑mail…“ vo formulári (`notify_creator`). Ak tréning nemá zadávateľa,
+  ide správa na `site.contact.email`.
+- **Newsletter** (`km_gym_newsletter`, double opt‑in): formulár v päte webu, na stránke Tréningy a na `/sk/newsletter`. Po potvrdení
+  odkazom z e‑mailu dostáva odberateľ automaticky „Nový tréning“ pri každom zverejnení tréningu (checkbox vo formulári tréningu,
+  predvolene zapnutý; posiela sa raz – `newsletter_sent_at`). Admin → **Newsletter**: počty, zoznam, odstránenie, a „Poslať dôležitú
+  informáciu“ všetkým (predmet, text, voliteľné tlačidlo; „Poslať skúšobne len mne“). Každý e‑mail má odkaz na odhlásenie (token).
 - **E‑maily** (Resend): potvrdenie (s .ics), čakacia listina, uvoľnené miesto, zrušenie, pripomienka deň vopred
   (Vercel Cron 16:00 UTC → `/api/cron/training-reminders`, okno 18–42 h pred začiatkom, raz na tréning).
 

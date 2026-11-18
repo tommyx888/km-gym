@@ -50,11 +50,12 @@ export default function TrainingForm({ locale, t, training }: Props) {
     image_url: training?.image_url ?? '',
     pricing: training?.pricing ?? 'free',
     price: training?.price_cents != null ? String(training.price_cents / 100) : '',
-    payment_url: training?.payment_url ?? '',
     payment_note: training?.payment_note ?? '',
     members_only: training?.members_only ?? false,
     cancel_deadline_hours: training?.cancel_deadline_hours ?? 12,
     status: training?.status ?? 'published',
+    notify_creator: training?.notify_creator ?? true,
+    sendNewsletter: !training || !training.newsletter_sent_at,
     repeat: false,
     repeatWeeks: 4,
   });
@@ -101,15 +102,16 @@ export default function TrainingForm({ locale, t, training }: Props) {
       image_url: f.image_url,
       pricing: f.pricing,
       price_cents: f.pricing === 'paid' && f.price !== '' ? Math.round(parseFloat(f.price.replace(',', '.')) * 100) : null,
-      payment_url: f.payment_url,
+      payment_url: null,
       payment_note: f.payment_note,
       members_only: f.members_only,
       cancel_deadline_hours: f.cancel_deadline_hours,
       status: f.status,
+      notify_creator: f.notify_creator,
     };
     const res = training
-      ? await fetch('/api/admin/trainings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: training.id, data }) })
-      : await fetch('/api/admin/trainings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data, repeatWeeks: f.repeat ? f.repeatWeeks : 1 }) });
+      ? await fetch('/api/admin/trainings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: training.id, data, sendNewsletter: f.sendNewsletter }) })
+      : await fetch('/api/admin/trainings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data, repeatWeeks: f.repeat ? f.repeatWeeks : 1, sendNewsletter: f.sendNewsletter }) });
     const json = await res.json().catch(() => ({}));
     setBusy(false);
     if (!res.ok) {
@@ -219,12 +221,9 @@ export default function TrainingForm({ locale, t, training }: Props) {
               <input id="price" inputMode="decimal" className="field" value={f.price} onChange={(e) => set('price', e.target.value)} placeholder="10" />
             </div>
             <div>
-              <label htmlFor="payment_url" className="label"><span>{F.paymentUrl}</span></label>
-              <input id="payment_url" type="url" className="field" value={f.payment_url} onChange={(e) => set('payment_url', e.target.value)} placeholder="https://kmgym.reservine.me/…" />
-            </div>
-            <div>
               <label htmlFor="payment_note" className="label"><span>{F.paymentNote}</span></label>
               <input id="payment_note" className="field" value={f.payment_note} onChange={(e) => set('payment_note', e.target.value)} />
+              <p className="mt-2 text-xs text-ink-500">{F.paymentHint}</p>
             </div>
           </>
         )}
@@ -244,6 +243,17 @@ export default function TrainingForm({ locale, t, training }: Props) {
           <input type="checkbox" checked={f.members_only} onChange={(e) => set('members_only', e.target.checked)} className="h-4 w-4 accent-[#C8102E]" />
           {F.membersOnly}
         </label>
+        <label className="flex items-center gap-3 text-sm text-mist md:col-span-2">
+          <input type="checkbox" checked={f.notify_creator} onChange={(e) => set('notify_creator', e.target.checked)} className="h-4 w-4 accent-[#C8102E]" />
+          {F.notifyCreator}
+        </label>
+        {f.status === 'published' && (!training || !training.newsletter_sent_at) && (
+          <label className="flex items-center gap-3 text-sm text-mist md:col-span-2">
+            <input type="checkbox" checked={f.sendNewsletter} onChange={(e) => set('sendNewsletter', e.target.checked)} className="h-4 w-4 accent-[#C8102E]" />
+            {F.sendNewsletter}
+          </label>
+        )}
+        {training?.newsletter_sent_at && <p className="text-xs text-ink-500 md:col-span-2">{F.newsletterSent}</p>}
 
         {!training && (
           <div className="md:col-span-2 border-t hairline pt-5">

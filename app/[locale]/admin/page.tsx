@@ -59,6 +59,9 @@ export default async function AdminPage({ params }: Props) {
               <Link href={`${localizedHref(locale, 'admin')}/treningy`} className="btn btn-primary">
                 {t.admin.trainings.link} →
               </Link>
+              <Link href={`${localizedHref(locale, 'admin')}/newsletter`} className="btn btn-ghost">
+                {t.admin.newsletter.link} →
+              </Link>
             </div>
             <div className="grid grid-cols-2 gap-px bg-ink-700 lg:grid-cols-4">
               {(['total', 'active', 'tracker', 'admins'] as const).map((k) => (
